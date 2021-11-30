@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace SpecifyStorageTreeUpdateTool
+{
+    public partial class LoginScreen : Form
+    {
+        public LoginScreen()
+        {
+            InitializeComponent();
+            tbServerName.Text = Properties.Settings.Default.MySQLServer;
+            tbDBName.Text = Properties.Settings.Default.MySQLDatabase;
+            tbUserName.Text = Properties.Settings.Default.MySQLUser;
+            
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            if (tbUserName.Text.Length > 0
+                && tbServerName.Text.Length > 0
+                && tbDBName.Text.Length > 0
+                && tbPassword.Text.Length > 0)
+            {
+                SpecifyTools sp = new SpecifyTools(tbServerName.Text, tbDBName.Text, tbUserName.Text, tbPassword.Text);
+                if (sp.IsConnected())
+                {
+                    Properties.Settings.Default.MySQLServer = tbServerName.Text;
+                    Properties.Settings.Default.MySQLDatabase = tbDBName.Text;
+                    Properties.Settings.Default.MySQLUser = tbUserName.Text;
+                    Properties.Settings.Default.Save();
+                    this.Hide();
+                    Scanning scanning = new Scanning(sp);
+                    scanning.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Connection failed.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Complete all fields.");
+            }
+        }
+    }
+}
