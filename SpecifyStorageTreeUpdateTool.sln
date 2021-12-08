@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecifyStorageTreeUpdateTool", "SpecifyStorageTreeUpdateTool\SpecifyStorageTreeUpdateTool.csproj", "{41642856-DA5F-4B25-871C-8005CB0D763C}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{064A4C90-95C1-45F5-9179-696E77594CFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{41642856-DA5F-4B25-871C-8005CB0D763C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41642856-DA5F-4B25-871C-8005CB0D763C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41642856-DA5F-4B25-871C-8005CB0D763C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{064A4C90-95C1-45F5-9179-696E77594CFF}.Debug|Any CPU.ActiveCfg = Debug
+		{064A4C90-95C1-45F5-9179-696E77594CFF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
