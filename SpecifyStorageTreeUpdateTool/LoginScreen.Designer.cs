@@ -39,8 +39,10 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.tbKey = new System.Windows.Forms.TextBox();
+            this.lblKey = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -110,7 +112,7 @@
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(145, 20);
             this.lblUserName.TabIndex = 8;
-            this.lblUserName.Text = "MySQL User Name";
+            this.lblUserName.Text = "Specify User Name";
             this.toolTip1.SetToolTip(this.lblUserName, "Enter MySQL user name.");
             // 
             // tbPassword
@@ -123,22 +125,22 @@
             this.toolTip1.SetToolTip(this.tbPassword, "MySQL User Password");
             this.tbPassword.UseSystemPasswordChar = true;
             // 
-            // label1
+            // lblPassword
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(129, 207);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 20);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Password";
-            this.toolTip1.SetToolTip(this.label1, "MySQL User Password");
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(129, 207);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(78, 20);
+            this.lblPassword.TabIndex = 9;
+            this.lblPassword.Text = "Password";
+            this.toolTip1.SetToolTip(this.lblPassword, "MySQL User Password");
             // 
             // btnConnect
             // 
             this.btnConnect.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnect.Location = new System.Drawing.Point(334, 236);
+            this.btnConnect.Location = new System.Drawing.Point(334, 268);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(134, 28);
             this.btnConnect.TabIndex = 5;
@@ -147,14 +149,37 @@
             this.btnConnect.UseVisualStyleBackColor = false;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
+            // tbKey
+            // 
+            this.tbKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbKey.Location = new System.Drawing.Point(213, 236);
+            this.tbKey.Name = "tbKey";
+            this.tbKey.Size = new System.Drawing.Size(255, 26);
+            this.tbKey.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.tbKey, "Specify User Key");
+            this.tbKey.UseSystemPasswordChar = true;
+            // 
+            // lblKey
+            // 
+            this.lblKey.AutoSize = true;
+            this.lblKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKey.Location = new System.Drawing.Point(134, 239);
+            this.lblKey.Name = "lblKey";
+            this.lblKey.Size = new System.Drawing.Size(73, 20);
+            this.lblKey.TabIndex = 11;
+            this.lblKey.Text = "User Key";
+            this.toolTip1.SetToolTip(this.lblKey, "Specify User Key");
+            // 
             // LoginScreen
             // 
             this.AcceptButton = this.btnConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 296);
+            this.ClientSize = new System.Drawing.Size(542, 350);
+            this.Controls.Add(this.lblKey);
+            this.Controls.Add(this.tbKey);
             this.Controls.Add(this.btnConnect);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.tbUserName);
@@ -182,7 +207,9 @@
         private System.Windows.Forms.TextBox tbUserName;
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.TextBox tbKey;
+        private System.Windows.Forms.Label lblKey;
     }
 }

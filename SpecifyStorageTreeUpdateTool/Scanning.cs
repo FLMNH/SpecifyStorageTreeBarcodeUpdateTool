@@ -25,6 +25,11 @@ namespace SpecifyStorageTreeUpdateTool
         {
             InitializeComponent();
             this.sp = sp;
+            toolStripStatusUserName.Text = sp.AgentName;
+            toolStripStatusDatabase.Text = sp.Database;
+            toolStripStatusServer.Text = sp.Server;
+            tbOutput.AppendText("Start " + sp.AgentName + " using " + sp.Database + " on " + sp.Server + " at " + DateTime.Now.ToString() + ".");
+            tbOutput.AppendText(Environment.NewLine);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

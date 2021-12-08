@@ -17,7 +17,8 @@ namespace SpecifyStorageTreeUpdateTool
             InitializeComponent();
             tbServerName.Text = Properties.Settings.Default.MySQLServer;
             tbDBName.Text = Properties.Settings.Default.MySQLDatabase;
-            tbUserName.Text = Properties.Settings.Default.MySQLUser;
+            tbUserName.Text = Properties.Settings.Default.SpecifyUser;
+            tbKey.Text = Properties.Settings.Default.SpecifyUserKey;
             
         }
 
@@ -26,14 +27,16 @@ namespace SpecifyStorageTreeUpdateTool
             if (tbUserName.Text.Length > 0
                 && tbServerName.Text.Length > 0
                 && tbDBName.Text.Length > 0
-                && tbPassword.Text.Length > 0)
+                && tbPassword.Text.Length > 0
+                && tbKey.Text.Length > 0)
             {
-                SpecifyTools sp = new SpecifyTools(tbServerName.Text, tbDBName.Text, tbUserName.Text, tbPassword.Text);
+                SpecifyTools sp = new SpecifyTools(tbServerName.Text, tbDBName.Text, tbUserName.Text, tbPassword.Text, tbKey.Text);
                 if (sp.IsConnected())
                 {
                     Properties.Settings.Default.MySQLServer = tbServerName.Text;
                     Properties.Settings.Default.MySQLDatabase = tbDBName.Text;
-                    Properties.Settings.Default.MySQLUser = tbUserName.Text;
+                    Properties.Settings.Default.SpecifyUser = tbUserName.Text;
+                    Properties.Settings.Default.SpecifyUserKey = tbKey.Text;
                     Properties.Settings.Default.Save();
                     this.Hide();
                     Scanning scanning = new Scanning(sp);
