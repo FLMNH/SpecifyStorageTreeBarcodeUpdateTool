@@ -8,7 +8,10 @@
     <Setting Name="MySQLDatabase" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="MySQLUser" Type="System.String" Scope="User">
+    <Setting Name="SpecifyUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SpecifyUserKey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

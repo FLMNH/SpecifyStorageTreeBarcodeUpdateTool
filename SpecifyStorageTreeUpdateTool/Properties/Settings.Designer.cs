@@ -50,12 +50,24 @@ namespace SpecifyStorageTreeUpdateTool.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string MySQLUser {
+        public string SpecifyUser {
             get {
-                return ((string)(this["MySQLUser"]));
+                return ((string)(this["SpecifyUser"]));
             }
             set {
-                this["MySQLUser"] = value;
+                this["SpecifyUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SpecifyUserKey {
+            get {
+                return ((string)(this["SpecifyUserKey"]));
+            }
+            set {
+                this["SpecifyUserKey"] = value;
             }
         }
     }
