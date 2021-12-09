@@ -56,8 +56,9 @@ namespace SpecifyStorageTreeUpdateTool
                     if (sp.IsValidStorageID(int.Parse(input.Substring(5))))
                     {
                         storageID = int.Parse(input.Substring(5));
-                        lblStatus.Text = "Shelf set to " + storageID + ".";
-                        tbOutput.AppendText("Shelf set to " + storageID + ".");
+                        string shelfName = sp.GetStorageIDName(storageID);
+                        lblStatus.Text = "Shelf set to " + shelfName + ".";
+                        tbOutput.AppendText("Shelf set to " + shelfName + ".");
                         tbOutput.AppendText(Environment.NewLine);
                     }
                     else
@@ -75,7 +76,7 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 if (sp.UpdatePreparationStorageID(input, storageID))
                 {
-                    tbOutput.AppendText(input + " set to " + storageID);
+                    tbOutput.AppendText(sp.GetPrepName(input) + " shelved to " + sp.GetStorageIDName(storageID));
                     tbOutput.AppendText(Environment.NewLine);
                 }
                 else
@@ -112,6 +113,12 @@ namespace SpecifyStorageTreeUpdateTool
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            sp.CloseConnection();
+            base.OnFormClosing(e);
         }
     }
 }
