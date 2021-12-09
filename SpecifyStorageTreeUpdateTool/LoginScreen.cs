@@ -31,7 +31,7 @@ namespace SpecifyStorageTreeUpdateTool
                 && tbKey.Text.Length > 0)
             {
                 SpecifyTools sp = new SpecifyTools(tbServerName.Text, tbDBName.Text, tbUserName.Text, tbPassword.Text, tbKey.Text);
-                if (sp.IsConnected())
+                if (sp.IsConnected)
                 {
                     Properties.Settings.Default.MySQLServer = tbServerName.Text;
                     Properties.Settings.Default.MySQLDatabase = tbDBName.Text;

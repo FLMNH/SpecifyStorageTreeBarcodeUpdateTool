@@ -11,13 +11,14 @@ namespace SpecifyStorageTreeUpdateTool
 {
     public class SpecifyTools
     {
-        MySql.Data.MySqlClient.MySqlConnection conn;
-        private bool isConnected;
+        private static MySql.Data.MySqlClient.MySqlConnection conn;
+        private static bool isConnected;
         private int agentID;
         private string userName;
         private string database;
         private string server;
 
+        public bool IsConnected { get { return isConnected; } }
         public string AgentName {  get { return userName; } }
         public string Database { get { return database; } }
         public string Server { get { return server; } }
@@ -54,11 +55,6 @@ namespace SpecifyStorageTreeUpdateTool
 
         }
 
-        public bool IsConnected()
-        {
-            return isConnected;
-        }
-
         private int getSpecifyUserID(string username, string password)
         {
             try
@@ -85,6 +81,31 @@ namespace SpecifyStorageTreeUpdateTool
             return -1;
         }
 
+        public string GetPrepName(string prepGUID)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "SELECT c.CatalogNumber, pt.Name, p.CountAmt FROM preparation p INNER JOIN collectionobject c ON p.CollectionObjectID = c.CollectionObjectID INNER JOIN preptype pt on p.PrepTypeID = pt.PrepTypeID WHERE p.GUID = @prepGUID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@prepGUID", prepGUID);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return reader.GetString(0).TrimStart('0') + " " + reader.GetString(1) + " " +reader.GetString(2);
+                        }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return String.Empty;
+        }
+
         private int getAgentID(int specifyUserID)
         {
             try
@@ -107,6 +128,29 @@ namespace SpecifyStorageTreeUpdateTool
                 MessageBox.Show(ex.ToString());
             }
             return -1;
+        }
+
+        public string GetStorageIDName(int storageId)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "SELECT FullName FROM storage WHERE StorageID = @storageID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@storageID", storageId);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return result.ToString();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return String.Empty;
         }
 
         public bool IsValidStorageID(int id)
@@ -185,6 +229,15 @@ namespace SpecifyStorageTreeUpdateTool
                 }
             }
             return false;
+        }
+
+        public void CloseConnection()
+        {
+            if (isConnected)
+            {
+                conn.Close();
+                isConnected = false;
+            }
         }
     }
 }
