@@ -171,9 +171,10 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 try
                 {
-                    string sql = "UPDATE preparation SET StorageID = @storageId WHERE GUID = @prepGUID";
+                    string sql = "UPDATE preparation SET StorageID = @storageId, ModifiedByAgentID = @agentID, TimestampModified = NOW() WHERE GUID = @prepGUID";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@storageId", storageId);
+                    cmd.Parameters.AddWithValue("@agentID", agentID);
                     cmd.Parameters.AddWithValue("@prepGUID", prepGUID);
                     cmd.ExecuteNonQuery();
                     return true;

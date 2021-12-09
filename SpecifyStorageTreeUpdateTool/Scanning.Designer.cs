@@ -36,21 +36,22 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.tbOutput = new System.Windows.Forms.TextBox();
+            this.tbInput = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusUserName = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusSpacer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusUserName = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusDatabase = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusServer = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
-            this.lblHx = new System.Windows.Forms.Label();
-            this.tbOutput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.tbInput = new System.Windows.Forms.TextBox();
+            this.lblHx = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -77,7 +78,8 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveScanHistoryToolStripMenuItem});
+            this.saveScanHistoryToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -85,7 +87,7 @@
             // saveScanHistoryToolStripMenuItem
             // 
             this.saveScanHistoryToolStripMenuItem.Name = "saveScanHistoryToolStripMenuItem";
-            this.saveScanHistoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveScanHistoryToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.saveScanHistoryToolStripMenuItem.Text = "Save Scan History";
             this.saveScanHistoryToolStripMenuItem.Click += new System.EventHandler(this.saveScanHistoryToolStripMenuItem_Click);
             // 
@@ -100,9 +102,51 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(830, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 63);
+            this.button1.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.button1, "Save Output to File");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // tbOutput
+            // 
+            this.tbOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbOutput.Location = new System.Drawing.Point(0, 0);
+            this.tbOutput.Multiline = true;
+            this.tbOutput.Name = "tbOutput";
+            this.tbOutput.ReadOnly = true;
+            this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbOutput.Size = new System.Drawing.Size(549, 532);
+            this.tbOutput.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.tbOutput, "Scan History");
+            this.tbOutput.WordWrap = false;
+            // 
+            // tbInput
+            // 
+            this.tbInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbInput.Location = new System.Drawing.Point(12, 127);
+            this.tbInput.Name = "tbInput";
+            this.tbInput.Size = new System.Drawing.Size(335, 26);
+            this.tbInput.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.tbInput, "Scan a Barcode");
+            this.tbInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enterKey_KeyDown);
             // 
             // statusStrip1
             // 
@@ -117,17 +161,6 @@
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusUserName
-            // 
-            this.toolStripStatusUserName.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.toolStripStatusUserName.Name = "toolStripStatusUserName";
-            this.toolStripStatusUserName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripStatusUserName.Size = new System.Drawing.Size(66, 19);
-            this.toolStripStatusUserName.Text = "UserName";
-            this.toolStripStatusUserName.ToolTipText = "Current User Name";
-            // 
             // toolStripStatusSpacer
             // 
             this.toolStripStatusSpacer.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
@@ -138,6 +171,17 @@
             this.toolStripStatusSpacer.Spring = true;
             this.toolStripStatusSpacer.Text = "    ";
             this.toolStripStatusSpacer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // toolStripStatusUserName
+            // 
+            this.toolStripStatusUserName.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusUserName.Name = "toolStripStatusUserName";
+            this.toolStripStatusUserName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStripStatusUserName.Size = new System.Drawing.Size(66, 19);
+            this.toolStripStatusUserName.Text = "UserName";
+            this.toolStripStatusUserName.ToolTipText = "Current User Name";
             // 
             // toolStripStatusDatabase
             // 
@@ -178,47 +222,6 @@
             this.splitContainer1.SplitterDistance = 364;
             this.splitContainer1.TabIndex = 10;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(830, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 63);
-            this.button1.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.button1, "Save Output to File");
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // lblHx
-            // 
-            this.lblHx.AutoSize = true;
-            this.lblHx.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHx.Location = new System.Drawing.Point(-11, -55);
-            this.lblHx.Name = "lblHx";
-            this.lblHx.Size = new System.Drawing.Size(99, 20);
-            this.lblHx.TabIndex = 8;
-            this.lblHx.Text = "Scan History";
-            // 
-            // tbOutput
-            // 
-            this.tbOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbOutput.Location = new System.Drawing.Point(0, 0);
-            this.tbOutput.Multiline = true;
-            this.tbOutput.Name = "tbOutput";
-            this.tbOutput.ReadOnly = true;
-            this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOutput.Size = new System.Drawing.Size(549, 532);
-            this.tbOutput.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.tbOutput, "Scan History");
-            this.tbOutput.WordWrap = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -249,14 +252,15 @@
             this.lblStatus.TabIndex = 10;
             this.lblStatus.Text = "Scan a shelf label to begin.";
             // 
-            // tbInput
+            // lblHx
             // 
-            this.tbInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbInput.Location = new System.Drawing.Point(12, 127);
-            this.tbInput.Name = "tbInput";
-            this.tbInput.Size = new System.Drawing.Size(335, 26);
-            this.tbInput.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.tbInput, "Scan a Barcode");
+            this.lblHx.AutoSize = true;
+            this.lblHx.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHx.Location = new System.Drawing.Point(-11, -55);
+            this.lblHx.Name = "lblHx";
+            this.lblHx.Size = new System.Drawing.Size(99, 20);
+            this.lblHx.TabIndex = 8;
+            this.lblHx.Text = "Scan History";
             // 
             // splitContainer2
             // 
@@ -287,10 +291,18 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // Scanning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(917, 670);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.statusStrip1);
@@ -342,6 +354,7 @@
         private System.Windows.Forms.TextBox tbOutput;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 

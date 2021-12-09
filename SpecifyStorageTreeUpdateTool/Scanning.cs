@@ -95,6 +95,7 @@ namespace SpecifyStorageTreeUpdateTool
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "txt files (*.txt)|*.txt";
             saveFileDialog.Title = "Save Scan History";
+            saveFileDialog.FileName = DateTime.Now.ToLocalTime().ToString("yyyyMMddhhmm") + "-" + sp.AgentName + "-" + sp.Database + ".txt";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -106,6 +107,11 @@ namespace SpecifyStorageTreeUpdateTool
         private void button1_Click(object sender, EventArgs e)
         {
             saveScanHistoryToolStripMenuItem_Click(sender, e);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }
