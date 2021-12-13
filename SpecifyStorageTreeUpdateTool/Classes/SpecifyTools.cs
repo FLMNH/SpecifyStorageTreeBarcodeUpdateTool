@@ -28,7 +28,7 @@ namespace SpecifyStorageTreeUpdateTool
 
         }
 
-        public SpecifyTools(string dbServer, string dbName, string userName, string userPassword, string userKey)
+        public SpecifyTools(string dbServer, string dbName, string collectionName, string userName, string userPassword, string userKey)
         {
             Decryptor decryptor = new Decryptor();
             string[] master = decryptor.decrypt(userKey, userPassword).Split(',');
@@ -40,11 +40,14 @@ namespace SpecifyStorageTreeUpdateTool
                 int agentID = getAgentID(getSpecifyUserID(userName, userPassword));
                 if (agentID != -1)
                 {
-                    this.agentID = agentID;
-                    this.userName = userName;
-                    this.database = dbName;
-                    this.server = dbServer;
-                    isConnected = true;
+                    if (hasPreparationModify(userName, userPassword, collectionName))
+                    {
+                        this.agentID = agentID;
+                        this.userName = userName;
+                        this.database = dbName;
+                        this.server = dbServer;
+                        isConnected = true;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -53,6 +56,85 @@ namespace SpecifyStorageTreeUpdateTool
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private bool hasPreparationModify(string username, string password, string collectionName)
+        {
+            if (isCollectionName(collectionName))
+            {
+                string userType = getSpecifyUserType(username, password, collectionName);
+                if (userType.Equals("Manager"))
+                {
+                    return true;
+                }
+                else if (userType.Equals("LimitedAccess"))
+                {
+                    bool auth = isLimitedUserWithPrepModify(getSpPrincipalID(getSpecifyUserID(username, password), collectionName));
+                    if (!auth)
+                    {
+                        MessageBox.Show(username + " does not have modify permission for collection " + collectionName + ".");
+                        return auth;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool isLimitedUserWithPrepModify(int spPrincipalID)
+        {
+            try
+            {
+                string sql = @"SELECT 
+	                                p.Actions
+                                from 
+	                                sppermission p
+                                    inner join spprincipal_sppermission pp on p.SpPermissionID = pp.SpPermissionID
+                                where 
+	                                p.Name = 'DO.preparation'  
+                                    and pp.SpPrincipalID = @spPrincipalID";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@spPrincipalID", spPrincipalID);
+                object result = cmd.ExecuteScalar();
+                if (result != DBNull.Value)
+                {
+                    return result.ToString().Contains("modify");
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return false;
+        }
+
+        private int getSpPrincipalID(int userID, string collectionName)
+        {
+            try
+            {
+                string sql = @"select 
+	                                spprincipal.SpPrincipalID
+                                from 
+	                                spprincipal 
+                                    inner join specifyuser_spprincipal on spprincipal.SpPrincipalID = specifyuser_spprincipal.SpPrincipalID
+                                    inner join specifyuser on specifyuser_spprincipal.SpecifyUserID = specifyuser.SpecifyUserID
+                                where 
+	                                spprincipal.userGroupScopeID = @collectionID
+                                    and GroupSubClass = 'edu.ku.brc.af.auth.specify.principal.UserPrincipal'
+                                    and specifyuser.SpecifyUserID = @userID";
+                MySqlCommand cmd = new MySqlCommand(sql,conn);
+                cmd.Parameters.AddWithValue("@collectionID", getCollectionID(collectionName));
+                cmd.Parameters.AddWithValue("@userID", userID);
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result.ToString());
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return -1;
         }
 
         private int getSpecifyUserID(string username, string password)
@@ -79,6 +161,79 @@ namespace SpecifyStorageTreeUpdateTool
                 MessageBox.Show(ex.ToString());
             }
             return -1;
+        }
+
+        private bool isCollectionName(string collectionName)
+        {
+            try
+            {
+                string sql = "select count(UserGroupScopeID) from collection where CollectionName = @collectionName";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@collectionName", collectionName);
+                object result = cmd.ExecuteScalar();
+                if (result != DBNull.Value)
+                {
+                    if (Convert.ToInt32(result.ToString()) == 1)
+                    {
+                        return true;
+                    }    
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return false;
+        }
+
+        private int getCollectionID(string collectionName)
+        {
+            try
+            {
+                string sql = "select UserGroupScopeID from collection where CollectionName = @collectionName";
+                MySqlCommand cmd = new MySqlCommand( sql, conn);
+                cmd.Parameters.AddWithValue("@collectionName", collectionName);
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result.ToString());
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return -1;
+        }
+
+        private string getSpecifyUserType(string username, string password, string collectionName)
+        {
+            try
+            {
+                string sql = @"select 
+                                    spprincipal.groupType
+                                from
+                                    spprincipal
+                                    inner join specifyuser_spprincipal on spprincipal.SpPrincipalID = specifyuser_spprincipal.SpPrincipalID
+                                    inner join specifyuser on specifyuser_spprincipal.SpecifyUserID = specifyuser.SpecifyUserID
+                                where
+                                    spprincipal.userGroupScopeID = @collectionID
+                                    and GroupSubClass = 'edu.ku.brc.af.auth.specify.principal.GroupPrincipal'
+                                    and specifyuser.SpecifyUserID = @specifyUserID";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@collectionID", getCollectionID(collectionName));
+                cmd.Parameters.AddWithValue("@specifyUserID", getSpecifyUserID(username, password));
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return String.Empty;
         }
 
         public string GetPrepName(string prepGUID)

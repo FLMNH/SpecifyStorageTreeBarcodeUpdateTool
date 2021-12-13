@@ -43,6 +43,8 @@
             this.btnConnect = new System.Windows.Forms.Button();
             this.tbKey = new System.Windows.Forms.TextBox();
             this.lblKey = new System.Windows.Forms.Label();
+            this.tbCollectionName = new System.Windows.Forms.TextBox();
+            this.lblCollectionName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -98,7 +100,7 @@
             // tbUserName
             // 
             this.tbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUserName.Location = new System.Drawing.Point(213, 172);
+            this.tbUserName.Location = new System.Drawing.Point(213, 205);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(255, 26);
             this.tbUserName.TabIndex = 4;
@@ -108,7 +110,7 @@
             // 
             this.lblUserName.AutoSize = true;
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserName.Location = new System.Drawing.Point(62, 175);
+            this.lblUserName.Location = new System.Drawing.Point(62, 208);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(145, 20);
             this.lblUserName.TabIndex = 8;
@@ -118,7 +120,7 @@
             // tbPassword
             // 
             this.tbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPassword.Location = new System.Drawing.Point(213, 204);
+            this.tbPassword.Location = new System.Drawing.Point(213, 237);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(255, 26);
             this.tbPassword.TabIndex = 1;
@@ -129,7 +131,7 @@
             // 
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(129, 207);
+            this.lblPassword.Location = new System.Drawing.Point(129, 240);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(78, 20);
             this.lblPassword.TabIndex = 9;
@@ -140,7 +142,7 @@
             // 
             this.btnConnect.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnect.Location = new System.Drawing.Point(334, 268);
+            this.btnConnect.Location = new System.Drawing.Point(334, 301);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(134, 28);
             this.btnConnect.TabIndex = 5;
@@ -152,7 +154,7 @@
             // tbKey
             // 
             this.tbKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbKey.Location = new System.Drawing.Point(213, 236);
+            this.tbKey.Location = new System.Drawing.Point(213, 269);
             this.tbKey.Name = "tbKey";
             this.tbKey.Size = new System.Drawing.Size(255, 26);
             this.tbKey.TabIndex = 10;
@@ -163,19 +165,41 @@
             // 
             this.lblKey.AutoSize = true;
             this.lblKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKey.Location = new System.Drawing.Point(134, 239);
+            this.lblKey.Location = new System.Drawing.Point(134, 272);
             this.lblKey.Name = "lblKey";
             this.lblKey.Size = new System.Drawing.Size(73, 20);
             this.lblKey.TabIndex = 11;
             this.lblKey.Text = "User Key";
             this.toolTip1.SetToolTip(this.lblKey, "Specify User Key");
             // 
+            // tbCollectionName
+            // 
+            this.tbCollectionName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCollectionName.Location = new System.Drawing.Point(213, 172);
+            this.tbCollectionName.Name = "tbCollectionName";
+            this.tbCollectionName.Size = new System.Drawing.Size(255, 26);
+            this.tbCollectionName.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.tbCollectionName, "Enter Specify database name.");
+            // 
+            // lblCollectionName
+            // 
+            this.lblCollectionName.AutoSize = true;
+            this.lblCollectionName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCollectionName.Location = new System.Drawing.Point(82, 175);
+            this.lblCollectionName.Name = "lblCollectionName";
+            this.lblCollectionName.Size = new System.Drawing.Size(124, 20);
+            this.lblCollectionName.TabIndex = 13;
+            this.lblCollectionName.Text = "Collection Name";
+            this.toolTip1.SetToolTip(this.lblCollectionName, "Enter Specify database name.");
+            // 
             // LoginScreen
             // 
             this.AcceptButton = this.btnConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 350);
+            this.ClientSize = new System.Drawing.Size(570, 417);
+            this.Controls.Add(this.lblCollectionName);
+            this.Controls.Add(this.tbCollectionName);
             this.Controls.Add(this.lblKey);
             this.Controls.Add(this.tbKey);
             this.Controls.Add(this.btnConnect);
@@ -211,5 +235,7 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.TextBox tbKey;
         private System.Windows.Forms.Label lblKey;
+        private System.Windows.Forms.TextBox tbCollectionName;
+        private System.Windows.Forms.Label lblCollectionName;
     }
 }

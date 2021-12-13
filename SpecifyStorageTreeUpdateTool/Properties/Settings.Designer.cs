@@ -70,5 +70,17 @@ namespace SpecifyStorageTreeUpdateTool.Properties {
                 this["SpecifyUserKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SpecifyCollectionName {
+            get {
+                return ((string)(this["SpecifyCollectionName"]));
+            }
+            set {
+                this["SpecifyCollectionName"] = value;
+            }
+        }
     }
 }
