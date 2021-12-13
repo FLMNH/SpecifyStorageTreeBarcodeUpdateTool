@@ -30,6 +30,7 @@ namespace SpecifyStorageTreeUpdateTool
             toolStripStatusServer.Text = sp.Server;
             tbOutput.AppendText("Start " + sp.AgentName + " using " + sp.Database + " on " + sp.Server + " at " + DateTime.Now.ToString() + ".");
             tbOutput.AppendText(Environment.NewLine);
+            tbInput.Focus();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -49,7 +50,8 @@ namespace SpecifyStorageTreeUpdateTool
 
         private void processInput(string input)
         {
-            if (input.Length > 5 && input.Substring(0,5).Equals("Shelf"))
+            lblError.Text = String.Empty;
+            if (input.Length > 5 && input.Substring(0,5).Equals("SHELF"))
             {
                 try
                 {
@@ -63,30 +65,39 @@ namespace SpecifyStorageTreeUpdateTool
                     }
                     else
                     {
-                        lblStatus.Text = "Bad shelf ID " + input.Substring(5) + ". Scan shelf label to begin.";
+                        lblError.Text = "Bad shelf ID " + input.Substring(5) + ". Scan shelf label to begin.";
                     }
                 }
                 catch
                 {
-                    lblStatus.Text = "Bad shelf ID " + input.Substring(5) + ". Scan shelf label to begin.";
+                    lblError.Text = "Bad shelf ID " + input.Substring(5) + ". Scan shelf label to begin.";
                 }
                 
             }
-            else if (storageID != -1 && input.Length == 36 && sp.IsValidPrepGUID(input))
+            else if (storageID != -1)
             {
-                if (sp.UpdatePreparationStorageID(input, storageID))
+                try
                 {
-                    tbOutput.AppendText(sp.GetPrepName(input) + " shelved to " + sp.GetStorageIDName(storageID));
-                    tbOutput.AppendText(Environment.NewLine);
+                    int prepID = Convert.ToInt32(input); 
+                    if (sp.IsValidPrepID(prepID) && sp.UpdatePreparationStorageID(prepID, storageID))
+                    {
+                        tbOutput.AppendText(sp.GetPrepName(int.Parse(input)) + " shelved to " + sp.GetStorageIDName(storageID));
+                        tbOutput.AppendText(Environment.NewLine);
+                    }
+                    else
+                    {
+                        lblError.Text = input + " not valid prep ID.";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    lblStatus.Text = input + " not valid prep GUID.";
+                    lblError.Text = input + " not a value prep ID";
                 }
+                
             }
             else
             {
-                lblStatus.Text = input + " unrecognized.";
+                lblError.Text = input + " unrecognized.";
             }
         }
 

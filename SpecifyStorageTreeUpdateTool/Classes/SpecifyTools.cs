@@ -106,6 +106,31 @@ namespace SpecifyStorageTreeUpdateTool
             return String.Empty;
         }
 
+        public string GetPrepName(int prepID)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "SELECT c.CatalogNumber, pt.Name, p.CountAmt FROM preparation p INNER JOIN collectionobject c ON p.CollectionObjectID = c.CollectionObjectID INNER JOIN preptype pt on p.PrepTypeID = pt.PrepTypeID WHERE p.PreparationID = @prepID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@prepID", prepID);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return reader.GetString(0).TrimStart('0') + " " + reader.GetString(1) + " " + reader.GetString(2);
+                        }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return String.Empty;
+        }
+
         private int getAgentID(int specifyUserID)
         {
             try
@@ -181,6 +206,34 @@ namespace SpecifyStorageTreeUpdateTool
             return false;
         }
 
+        public bool IsValidPrepID(int prepID)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "SELECT count(PreparationID) FROM preparation WHERE PreparationID = @prepID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@prepID", prepID);
+                    object result = cmd.ExecuteScalar();
+                    if (result == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        int r = Convert.ToInt32(result);
+                        if (r == 1) { return true; }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return false;
+        }
+
         public bool IsValidPrepGUID(string GUID)
         {
             if (isConnected)
@@ -200,6 +253,28 @@ namespace SpecifyStorageTreeUpdateTool
                         int r = Convert.ToInt32(result);
                         if (r == 1) { return true; }
                     }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return false;
+        }
+
+        public bool UpdatePreparationStorageID(int prepID, int storageId)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "UPDATE preparation SET StorageID = @storageId, ModifiedByAgentID = @agentID, TimestampModified = NOW() WHERE PreparationID = @prepID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@storageId", storageId);
+                    cmd.Parameters.AddWithValue("@agentID", agentID);
+                    cmd.Parameters.AddWithValue("@prepID", prepID);
+                    cmd.ExecuteNonQuery();
+                    return true;
                 }
                 catch (MySqlException ex)
                 {
