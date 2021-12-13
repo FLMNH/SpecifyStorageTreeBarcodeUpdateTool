@@ -49,6 +49,7 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -144,7 +145,7 @@
             this.tbInput.Location = new System.Drawing.Point(28, 113);
             this.tbInput.Name = "tbInput";
             this.tbInput.Size = new System.Drawing.Size(335, 26);
-            this.tbInput.TabIndex = 9;
+            this.tbInput.TabIndex = 1;
             this.toolTip1.SetToolTip(this.tbInput, "Scan a Barcode");
             this.tbInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enterKey_KeyDown);
             // 
@@ -207,9 +208,10 @@
             this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfo.Location = new System.Drawing.Point(369, 119);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(344, 16);
+            this.lblInfo.Size = new System.Drawing.Size(613, 16);
             this.lblInfo.TabIndex = 11;
-            this.lblInfo.Text = "Shelf labels are storage.StorageID with a prefix of \"Shelf\".";
+            this.lblInfo.Text = "Shelf labels are storage.StorageID with a prefix of \"SHELF\". Prep lables are prep" +
+    "aration.PreparationID.";
             // 
             // lblStatus
             // 
@@ -230,6 +232,7 @@
             // 
             // splitContainer.Panel1
             // 
+            this.splitContainer.Panel1.Controls.Add(this.lblError);
             this.splitContainer.Panel1.Controls.Add(this.button1);
             this.splitContainer.Panel1.Controls.Add(this.lblInfo);
             this.splitContainer.Panel1.Controls.Add(this.lblTitle);
@@ -252,6 +255,16 @@
             this.lblTitle.Size = new System.Drawing.Size(499, 37);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.ForeColor = System.Drawing.Color.IndianRed;
+            this.lblError.Location = new System.Drawing.Point(552, 29);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 20);
+            this.lblError.TabIndex = 12;
             // 
             // Scanning
             // 
@@ -302,6 +315,7 @@
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Label lblError;
     }
 }
 
