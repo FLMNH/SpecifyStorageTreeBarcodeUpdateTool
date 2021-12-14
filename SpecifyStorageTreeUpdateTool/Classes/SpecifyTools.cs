@@ -13,15 +13,19 @@ namespace SpecifyStorageTreeUpdateTool
     {
         private static MySql.Data.MySqlClient.MySqlConnection conn;
         private static bool isConnected;
+        private static bool isAuthorized;
         private int agentID;
         private string userName;
+        private string collectionName;
         private string database;
         private string server;
 
         public bool IsConnected { get { return isConnected; } }
+        public bool IsAuthorized { get { return isAuthorized; } }
         public string AgentName {  get { return userName; } }
         public string Database { get { return database; } }
         public string Server { get { return server; } }
+        public string CollectionName { get { return collectionName; } }
 
         public SpecifyTools()
         {
@@ -40,13 +44,15 @@ namespace SpecifyStorageTreeUpdateTool
                 int agentID = getAgentID(getSpecifyUserID(userName, userPassword));
                 if (agentID != -1)
                 {
+                    this.agentID = agentID;
+                    this.userName = userName;
+                    this.database = dbName;
+                    this.server = dbServer;
+                    isConnected = true;
                     if (hasPreparationModify(userName, userPassword, collectionName))
                     {
-                        this.agentID = agentID;
-                        this.userName = userName;
-                        this.database = dbName;
-                        this.server = dbServer;
-                        isConnected = true;
+                        this.collectionName = collectionName;
+                        isAuthorized = true;
                     }
                 }
             }
@@ -72,7 +78,6 @@ namespace SpecifyStorageTreeUpdateTool
                     bool auth = isLimitedUserWithPrepModify(getSpPrincipalID(getSpecifyUserID(username, password), collectionName));
                     if (!auth)
                     {
-                        MessageBox.Show(username + " does not have modify permission for collection " + collectionName + ".");
                         return auth;
                     }
                 }

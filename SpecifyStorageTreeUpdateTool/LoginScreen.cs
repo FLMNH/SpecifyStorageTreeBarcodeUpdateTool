@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace SpecifyStorageTreeUpdateTool
 {
@@ -31,23 +32,40 @@ namespace SpecifyStorageTreeUpdateTool
                 && tbPassword.Text.Length > 0
                 && tbKey.Text.Length > 0)
             {
-                SpecifyTools sp = new SpecifyTools(tbServerName.Text, tbDBName.Text, tbCollectionName.Text, tbUserName.Text, tbPassword.Text, tbKey.Text);
-                if (sp.IsConnected)
+                try
                 {
-                    Properties.Settings.Default.MySQLServer = tbServerName.Text;
-                    Properties.Settings.Default.MySQLDatabase = tbDBName.Text;
-                    Properties.Settings.Default.SpecifyCollectionName = tbCollectionName.Text;
-                    Properties.Settings.Default.SpecifyUser = tbUserName.Text;
-                    Properties.Settings.Default.SpecifyUserKey = tbKey.Text;
-                    Properties.Settings.Default.Save();
-                    this.Hide();
-                    Scanning scanning = new Scanning(sp);
-                    scanning.ShowDialog();
-                    this.Close();
+                    SpecifyTools sp = new SpecifyTools(tbServerName.Text, tbDBName.Text, tbCollectionName.Text, tbUserName.Text, tbPassword.Text, tbKey.Text);
+                    if (sp.IsConnected)
+                    {
+                        Properties.Settings.Default.MySQLServer = tbServerName.Text;
+                        Properties.Settings.Default.MySQLDatabase = tbDBName.Text;
+                        Properties.Settings.Default.SpecifyCollectionName = tbCollectionName.Text;
+                        Properties.Settings.Default.SpecifyUser = tbUserName.Text;
+                        Properties.Settings.Default.SpecifyUserKey = tbKey.Text;
+                        Properties.Settings.Default.Save();
+                        lblStatus.Text = "Connected.";
+                        if (sp.IsAuthorized)
+                        {
+                            lblStatus.Text += " " + tbUserName.Text + " authorized for prep modify.";
+                            this.Hide();
+                            Scanning scanning = new Scanning(sp);
+                            scanning.ShowDialog();
+                            this.Close();
+                        }
+                        else
+                        {
+                            lblStatus.Text += tbUserName.Text + " not authorized for prep modify.";
+                            sp.CloseConnection();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Connection failed.");
+                    }
                 }
-                else
+                catch (CryptographicException ex)
                 {
-                    MessageBox.Show("Connection failed.");
+                    lblStatus.Text = "Bad username, password, and key combination.";
                 }
             }
             else
