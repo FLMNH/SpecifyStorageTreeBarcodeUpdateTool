@@ -220,12 +220,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_78B915927C973F18D58F9B4AA2AB742A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_69E926D67CF5404A90A1FF666DFE4CAF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -307,6 +301,12 @@
         "OwnerKey" = "8:_7799BA8B80B91E7C19399F3CC7E4ED45"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_78B915927C973F18D58F9B4AA2AB742A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -325,6 +325,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -341,6 +349,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -880,15 +896,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Specify Storage Tree Update Tool"
-        "ProductCode" = "8:{E5407112-29C1-45AF-9024-8BE6E03EE0DF}"
-        "PackageCode" = "8:{4C7B76B5-A255-4436-B0B7-EDDB0A7E6CE5}"
+        "ProductCode" = "8:{CCAFCBA9-F9E7-48DD-AED3-5FD87E6417C9}"
+        "PackageCode" = "8:{9582CB2B-7CA5-4123-9F40-44E4E156272B}"
         "UpgradeCode" = "8:{C22444F5-9DD6-40AC-AAC6-5D1276A44FCE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:Florida Museum of Natural HIstory"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
