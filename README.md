@@ -1,20 +1,28 @@
 Specify Storage Tree Barcode Update Tool
 
-This tool updates items’ storage location in the Specify database by simply scanning the shelf label barcode 
-followed by scanning the barcodes of the items on the shelf. The software remembers the last shelf until a new 
-shelf label is scanned. This affords rapid real time updating of the Specify database as the process involves 
+This tool updates items’ storage location in the Specify collection database by scanning the shelf label barcode 
+followed by scanning the barcodes of shelf items. The software remembers the last shelf until a new 
+shelf label is scanned. The workflow affords rapid updating of the collection database in real time, as the process involves 
 no keyboard entry or mouse use. 
 
-The application authenticates using Specify 6's user name, password, and key algorithm. 
+The application authenticates using Specify 6's user name, password, and key algorithm and authorizes that the user
+has preparation modify permission within the collection. Each scan updates the TimestampModified and ModifiedByAgentID
+for the preparation along with the storageID, so who/when is preserved at the record level.
 
-![LoginScreen](https://user-images.githubusercontent.com/81316350/146015801-38997559-b00b-404a-82b5-398cf790a6ea.png)
+Shelf labels are the storage.storageID prefixed with "SHELF" and preparation labels are preparation.PreparationID.
+We use the Libre Barcode 39 Text font from https://fonts.google.com/specimen/Libre+Barcode+39+Text for label generation.
+Code 39 uses asterisks as start stop delimiters, which makes for easy generation. Code 39 is nearly ubiquitous with
+scanners which keeps things simple.
+
+<img width="538" alt="LoginScreen" src="https://user-images.githubusercontent.com/81316350/146015801-38997559-b00b-404a-82b5-398cf790a6ea.png">
 
 
 Scanning history may be saved to a text file by clicking the download icon on the scanning form.
 
-<img width="538" alt="ScanningScreen" src="https://user-images.githubusercontent.com/81316350/145578406-a13316c6-9e41-47c8-acdd-c43f89f8ae04.png">
+<img width="638" alt="ScanningScreen" src="https://user-images.githubusercontent.com/81316350/146019316-b0def0b7-9a16-4312-bfb5-db07102c566e.png">
 
-This software adds fuctionality to a Specify collection database and requires a working installation of the Specify Collection Database software. https://specifysoftware.org
+This software adds fuctionality to a Specify collection database and requires a working installation of the Specify Collection database on
+a MySQL server. https://specifysoftware.org
 
 The Florida Museum of Natural History is a Founding Member of Specify Collections Consortium.
 
