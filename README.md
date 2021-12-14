@@ -26,3 +26,4 @@ a MySQL server. https://specifysoftware.org
 
 The Florida Museum of Natural History is a Founding Member of Specify Collections Consortium.
 
+This software was created by the [Florida Museum of Natural History Office of Museum Technology](https://www.floridamuseum.ufl.edu/omt/)
