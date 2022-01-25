@@ -9,9 +9,11 @@ The application authenticates using Specify 6's user name, password, and key alg
 has preparation modify permission within the collection. Each scan updates the TimestampModified and ModifiedByAgentID
 for the preparation along with the storageID, so who/when is preserved at the record level.
 
-Shelf labels are the storage.storageID prefixed with "SHELF" and preparation labels are preparation.PreparationID.
-We use the Libre Barcode 39 Text font from https://fonts.google.com/specimen/Libre+Barcode+39+Text for label generation.
-Code 39 uses asterisks as start stop delimiters, which makes for easy generation. Code 39 is nearly ubiquitous with
+Shelf labels are the storage.storageID prefixed with "SHELF" and preparation labels are preparation.PreparationID. The application
+is barcode symbology agnostic as the decoding is done in the scanner and passed to the application as keyboard input. Thusly,
+the application may be used with your preferred symbology so long as the data encoded is as described above. 
+
+For rapid proof of concept testing you may use the Libre Barcode 39 Text font from https://fonts.google.com/specimen/Libre+Barcode+39+Text for label generation. Code 39 uses asterisks as start stop delimiters, which makes for easy generation. Code 39 is nearly ubiquitous with
 scanners which keeps things simple.
 
 <img width="538" alt="LoginScreen" src="https://user-images.githubusercontent.com/81316350/146015801-38997559-b00b-404a-82b5-398cf790a6ea.png">
