@@ -131,5 +131,11 @@ namespace SpecifyStorageTreeUpdateTool
             sp.CloseConnection();
             base.OnFormClosing(e);
         }
+
+        private void configToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ConfigForm cf = new Forms.ConfigForm();
+            cf.ShowDialog();
+        }
     }
 }
