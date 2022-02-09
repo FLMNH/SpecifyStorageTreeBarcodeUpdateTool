@@ -81,8 +81,11 @@ namespace SpecifyStorageTreeUpdateTool
                     int prepID = Convert.ToInt32(input); 
                     if (sp.IsValidPrepID(prepID) && sp.UpdatePreparationStorageID(prepID, storageID))
                     {
-                        tbOutput.AppendText(sp.GetPrepName(int.Parse(input)) + " shelved to " + sp.GetStorageIDName(storageID));
+                        string storageLocationName = sp.GetStorageIDName(storageID);
+                        tbOutput.AppendText(sp.GetPrepName(int.Parse(input)) + " shelved to " + storageLocationName);
                         tbOutput.AppendText(Environment.NewLine);
+                        if (sp.LoggingEnabled)
+                            sp.Log(prepID, storageLocationName, storageID);
                     }
                     else
                     {
