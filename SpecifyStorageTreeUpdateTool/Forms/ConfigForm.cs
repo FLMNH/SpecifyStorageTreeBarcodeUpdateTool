@@ -12,9 +12,18 @@ namespace SpecifyStorageTreeUpdateTool.Forms
 {
     public partial class ConfigForm : Form
     {
+        private SpecifyTools sp;
+
         public ConfigForm()
         {
             InitializeComponent();
+        }
+
+        public ConfigForm(SpecifyTools sp)
+        {
+            InitializeComponent();
+            this.sp = sp;
+            
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -26,13 +35,28 @@ namespace SpecifyStorageTreeUpdateTool.Forms
         {
             if (enableAuditLogCheckbox.Checked)
             {
-                // Need to first check if the table exists and branch accordingly.
-               if ( MessageBox.Show("Enabling audit logging requires the IT Master username and password to create the table in the Specify database to store the audit log.","Warning",MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (sp.LogTableExists)
                 {
-                    MessageBox.Show("Prompt for Master username and passowrd.");
-                    
+                    MessageBox.Show("Log table already exists. Will enable auditing");
+                }
+                else
+                {
+                    if (MessageBox.Show("Log table not found.\nEnabling audit logging requires the IT Master username and password to create the table in the Specify database to store the audit log.", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        MasterUserNameLabel.Visible = true;
+                        MasterUserNameTextBox.Visible = true;
+                        MasterPasswordLabel.Visible = true;
+                        MasterPasswordTextBox.Visible = true;
+                        CreateTableEnableLogginButton.Visible = true;
+
+                    }
                 }
             }
+        }
+
+        private void CreateTableEnableLogginButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

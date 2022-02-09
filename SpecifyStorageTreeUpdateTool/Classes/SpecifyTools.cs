@@ -19,6 +19,7 @@ namespace SpecifyStorageTreeUpdateTool
         private string collectionName;
         private string database;
         private string server;
+        private bool logTableExists;
 
         public bool IsConnected { get { return isConnected; } }
         public bool IsAuthorized { get { return isAuthorized; } }
@@ -26,6 +27,7 @@ namespace SpecifyStorageTreeUpdateTool
         public string Database { get { return database; } }
         public string Server { get { return server; } }
         public string CollectionName { get { return collectionName; } }
+        public bool LogTableExists { get { return logTableExists; } }
 
         public SpecifyTools()
         {
@@ -49,6 +51,7 @@ namespace SpecifyStorageTreeUpdateTool
                     this.database = dbName;
                     this.server = dbServer;
                     isConnected = true;
+                    this.logTableExists = getLogTableExists();
                     if (hasPreparationModify(userName, userPassword, collectionName))
                     {
                         this.collectionName = collectionName;
@@ -462,6 +465,57 @@ namespace SpecifyStorageTreeUpdateTool
                 {
                     MessageBox.Show(ex.ToString());
                 }
+            }
+            return false;
+        }
+
+        private bool getLogTableExists()
+        {
+            try
+            {
+                string sql = @"SELECT EXISTS(
+                                            SELECT * FROM information_schema.tables 
+                                            WHERE table_schema = @DBName 
+                                            AND table_name = 'fmstoragescanninglog'
+                                            ) AS TableFound;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@DBName", this.Database);
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result.ToString()) == 1 ? true : false;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return false;
+        }
+
+        public bool CreateLogTable()
+        {
+            try
+            {
+                if (!logTableExists)
+                {
+                    string sql = @"CREATE TABLE `fmstoragescanninglog` (
+                                `fmstoragescanninglogId` INT NOT NULL AUTO_INCREMENT,
+                                `ScannedToFullName` VARCHAR(255) NOT NULL,
+                                `OldStorageId` INT NOT NULL,
+                                `NewStorageId` INT NOT NULL,
+                                `ScannedByAgentId` INT NOT NULL,
+                                `ScanTimestamp` DATETIME NOT NULL,
+                                PRIMARY KEY (`fmstoragescanninglogId`));";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteScalar();
+                    this.logTableExists = getLogTableExists();
+                    return this.logTableExists;
+                }                
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
             return false;
         }

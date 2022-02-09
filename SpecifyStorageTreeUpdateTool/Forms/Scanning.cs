@@ -134,7 +134,7 @@ namespace SpecifyStorageTreeUpdateTool
 
         private void configToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Forms.ConfigForm cf = new Forms.ConfigForm();
+            Forms.ConfigForm cf = new Forms.ConfigForm(sp);
             cf.ShowDialog();
         }
     }
