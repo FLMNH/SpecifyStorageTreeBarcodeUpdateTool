@@ -15,6 +15,7 @@ namespace SpecifyStorageTreeUpdateTool
     {
         private int storageID = -1;
         private SpecifyTools sp;
+        private int scanCount;
 
         public Scanning()
         {
@@ -86,6 +87,8 @@ namespace SpecifyStorageTreeUpdateTool
                         tbOutput.AppendText(Environment.NewLine);
                         if (sp.LoggingEnabled)
                             sp.Log(prepID, storageLocationName, storageID);
+                        scanCount++;
+                        lblScanCount.Text = "Scan Count: " + scanCount.ToString();
                     }
                     else
                     {
