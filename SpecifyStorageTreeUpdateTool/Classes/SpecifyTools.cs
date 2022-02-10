@@ -19,6 +19,10 @@ namespace SpecifyStorageTreeUpdateTool
         private string collectionName;
         private string database;
         private string server;
+        private bool logTableExists;
+        private string masterUsername;
+        private string masterPassword;
+        private bool loggingEnabled;
 
         public bool IsConnected { get { return isConnected; } }
         public bool IsAuthorized { get { return isAuthorized; } }
@@ -26,6 +30,11 @@ namespace SpecifyStorageTreeUpdateTool
         public string Database { get { return database; } }
         public string Server { get { return server; } }
         public string CollectionName { get { return collectionName; } }
+        public bool LogTableExists { get { return logTableExists; } }
+        public bool LoggingEnabled {
+            get { return loggingEnabled; }
+            set { loggingEnabled = value; }
+        }
 
         public SpecifyTools()
         {
@@ -49,6 +58,10 @@ namespace SpecifyStorageTreeUpdateTool
                     this.database = dbName;
                     this.server = dbServer;
                     isConnected = true;
+                    this.logTableExists = getLogTableExists();
+                    this.masterUsername =master[0];
+                    this.masterPassword =master[1];
+                    this.loggingEnabled = getLogTableExists();
                     if (hasPreparationModify(userName, userPassword, collectionName))
                     {
                         this.collectionName = collectionName;
@@ -455,6 +468,86 @@ namespace SpecifyStorageTreeUpdateTool
                     cmd.Parameters.AddWithValue("@storageId", storageId);
                     cmd.Parameters.AddWithValue("@agentID", agentID);
                     cmd.Parameters.AddWithValue("@prepGUID", prepGUID);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return false;
+        }
+
+        private bool getLogTableExists()
+        {
+            try
+            {
+                string sql = @"SELECT EXISTS(
+                                            SELECT * FROM information_schema.tables 
+                                            WHERE table_schema = @DBName 
+                                            AND table_name = 'fmstoragescanninglog'
+                                            ) AS TableFound;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@DBName", this.Database);
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result.ToString()) == 1 ? true : false;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return false;
+        }
+
+        public bool CreateLogTable()
+        {
+            try
+            {
+                if (!logTableExists)
+                {
+                    string sql = @"CREATE TABLE `fmstoragescanninglog` (
+                                `fmstoragescanninglogId` INT NOT NULL AUTO_INCREMENT,
+                                `PrepId` INT NOT NULL,
+                                `ScannedToFullName` VARCHAR(255) NOT NULL,
+                                `NewStorageId` INT NOT NULL,
+                                `ScannedByAgentId` INT NOT NULL,
+                                `ScanTimestamp` DATETIME NOT NULL,
+                                PRIMARY KEY (`fmstoragescanninglogId`));";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteScalar();
+                    this.logTableExists = getLogTableExists();
+                    return this.logTableExists;
+                }                
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return false;
+        }
+
+        public bool IsCorrectMaster(string MasterUsername, string MasterPassword)
+        {
+            return MasterUsername == this.masterUsername && MasterPassword == this.masterPassword;
+        }
+
+        public bool Log(int prepId, string storageName, int storageId)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "INSERT INTO fmstoragescanninglog (PrepId,ScannedToFullName,NewStorageId,ScannedByAgentId,ScanTimestamp)";
+                    sql += " VALUES (@prepId,@storageName,@storageId,@agentId,NOW())";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@prepId", prepId);
+                    cmd.Parameters.AddWithValue("@storageName", storageName);
+                    cmd.Parameters.AddWithValue("@storageId", storageId);
+                    cmd.Parameters.AddWithValue("@agentId", this.agentID);
                     cmd.ExecuteNonQuery();
                     return true;
                 }

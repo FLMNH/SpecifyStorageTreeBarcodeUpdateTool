@@ -15,6 +15,7 @@ namespace SpecifyStorageTreeUpdateTool
     {
         private int storageID = -1;
         private SpecifyTools sp;
+        private int scanCount;
 
         public Scanning()
         {
@@ -81,8 +82,13 @@ namespace SpecifyStorageTreeUpdateTool
                     int prepID = Convert.ToInt32(input); 
                     if (sp.IsValidPrepID(prepID) && sp.UpdatePreparationStorageID(prepID, storageID))
                     {
-                        tbOutput.AppendText(sp.GetPrepName(int.Parse(input)) + " shelved to " + sp.GetStorageIDName(storageID));
+                        string storageLocationName = sp.GetStorageIDName(storageID);
+                        tbOutput.AppendText(sp.GetPrepName(int.Parse(input)) + " shelved to " + storageLocationName);
                         tbOutput.AppendText(Environment.NewLine);
+                        if (sp.LoggingEnabled)
+                            sp.Log(prepID, storageLocationName, storageID);
+                        scanCount++;
+                        lblScanCount.Text = "Scan Count: " + scanCount.ToString();
                     }
                     else
                     {
@@ -130,6 +136,12 @@ namespace SpecifyStorageTreeUpdateTool
         {
             sp.CloseConnection();
             base.OnFormClosing(e);
+        }
+
+        private void configToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ConfigForm cf = new Forms.ConfigForm(sp);
+            cf.ShowDialog();
         }
     }
 }
