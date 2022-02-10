@@ -164,5 +164,10 @@
   <ItemGroup>
     <None Include="Resources\FM-Email-Signature.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
