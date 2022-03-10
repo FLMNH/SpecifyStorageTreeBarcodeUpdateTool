@@ -15,6 +15,7 @@ namespace SpecifyStorageTreeUpdateTool
         private static bool isConnected;
         private static bool isAuthorized;
         private int agentID;
+        private int collectionID;
         private string userName;
         private string collectionName;
         private string database;
@@ -54,6 +55,7 @@ namespace SpecifyStorageTreeUpdateTool
                 if (agentID != -1)
                 {
                     this.agentID = agentID;
+                    this.collectionID = getCollectionID(collectionName);
                     this.userName = userName;
                     this.database = dbName;
                     this.server = dbServer;
@@ -385,9 +387,10 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 try
                 {
-                    string sql = "SELECT count(PreparationID) FROM preparation WHERE PreparationID = @prepID";
+                    string sql = "SELECT count(PreparationID) FROM preparation WHERE CollectionMemberID = @collectionID AND PreparationID = @prepID";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@prepID", prepID);
+                    cmd.Parameters.AddWithValue("@collectionID", this.collectionID);
                     object result = cmd.ExecuteScalar();
                     if (result == null)
                     {
@@ -413,9 +416,10 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 try
                 {
-                    string sql = "SELECT count(GUID) FROM preparation WHERE GUID = @GUID";
+                    string sql = "SELECT count(GUID) FROM preparation WHERE CollectionMemberID = @collectionID AND GUID = @GUID";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@GUID", GUID);
+                    cmd.Parameters.AddWithValue("@collectionID", this.collectionID);
                     object result = cmd.ExecuteScalar();
                     if (result == null)
                     {
