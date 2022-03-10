@@ -29,6 +29,7 @@ namespace SpecifyStorageTreeUpdateTool
             toolStripStatusUserName.Text = sp.AgentName;
             toolStripStatusDatabase.Text = sp.Database;
             toolStripStatusServer.Text = sp.Server;
+            toolStripStatusLabelCollection.Text = sp.CollectionName;
             tbOutput.AppendText("Start " + sp.AgentName + " using " + sp.Database + " on " + sp.Server + " at " + DateTime.Now.ToString() + ".");
             tbOutput.AppendText(Environment.NewLine);
             tbInput.Focus();

@@ -50,9 +50,10 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.lblScanCount = new System.Windows.Forms.Label();
+            this.toolStripStatusLabelCollection = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -173,6 +174,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusSpacer,
             this.toolStripStatusUserName,
+            this.toolStripStatusLabelCollection,
             this.toolStripStatusDatabase,
             this.toolStripStatusServer});
             this.statusStrip1.Location = new System.Drawing.Point(0, 819);
@@ -187,7 +189,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.toolStripStatusSpacer.Name = "toolStripStatusSpacer";
-            this.toolStripStatusSpacer.Size = new System.Drawing.Size(890, 19);
+            this.toolStripStatusSpacer.Size = new System.Drawing.Size(798, 19);
             this.toolStripStatusSpacer.Spring = true;
             this.toolStripStatusSpacer.Text = "    ";
             this.toolStripStatusSpacer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -266,6 +268,16 @@
             this.splitContainer.SplitterDistance = 156;
             this.splitContainer.TabIndex = 11;
             // 
+            // lblScanCount
+            // 
+            this.lblScanCount.AutoSize = true;
+            this.lblScanCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScanCount.Location = new System.Drawing.Point(909, 35);
+            this.lblScanCount.Name = "lblScanCount";
+            this.lblScanCount.Size = new System.Drawing.Size(101, 20);
+            this.lblScanCount.TabIndex = 13;
+            this.lblScanCount.Text = "Scan Count: ";
+            // 
             // lblError
             // 
             this.lblError.AutoSize = true;
@@ -286,15 +298,14 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
             // 
-            // lblScanCount
+            // toolStripStatusLabelCollection
             // 
-            this.lblScanCount.AutoSize = true;
-            this.lblScanCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScanCount.Location = new System.Drawing.Point(909, 35);
-            this.lblScanCount.Name = "lblScanCount";
-            this.lblScanCount.Size = new System.Drawing.Size(101, 20);
-            this.lblScanCount.TabIndex = 13;
-            this.lblScanCount.Text = "Scan Count: ";
+            this.toolStripStatusLabelCollection.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabelCollection.Name = "toolStripStatusLabelCollection";
+            this.toolStripStatusLabelCollection.Size = new System.Drawing.Size(65, 19);
+            this.toolStripStatusLabelCollection.Text = "Collection";
             // 
             // Scanning
             // 
@@ -349,6 +360,7 @@
         private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
         private System.Windows.Forms.Label lblScanCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCollection;
     }
 }
 
