@@ -17,5 +17,8 @@
     <Setting Name="SpecifyCollectionName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="StorageBarcodeField" Type="System.String" Scope="User">
+      <Value Profile="(Default)">number1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
