@@ -24,6 +24,7 @@ namespace SpecifyStorageTreeUpdateTool
         private string masterUsername;
         private string masterPassword;
         private bool loggingEnabled;
+        private string storageBarcodeField;
 
         public bool IsConnected { get { return isConnected; } }
         public bool IsAuthorized { get { return isAuthorized; } }
@@ -35,6 +36,10 @@ namespace SpecifyStorageTreeUpdateTool
         public bool LoggingEnabled {
             get { return loggingEnabled; }
             set { loggingEnabled = value; }
+        }
+        public string StorageBarcodeFieldName { 
+            get { return storageBarcodeField; } 
+            set { storageBarcodeField = value; }    
         }
 
         public SpecifyTools()
@@ -68,6 +73,15 @@ namespace SpecifyStorageTreeUpdateTool
                     {
                         this.collectionName = collectionName;
                         isAuthorized = true;
+                    }
+                    if (Properties.Settings.Default.StorageBarcodeField == String.Empty)
+                    {
+                        Properties.Settings.Default.StorageBarcodeField = "number1";
+                        storageBarcodeField = "number1";
+                    }
+                    else
+                    {
+                        storageBarcodeField = Properties.Settings.Default.StorageBarcodeField;
                     }
                 }
             }
@@ -472,6 +486,45 @@ namespace SpecifyStorageTreeUpdateTool
                     cmd.Parameters.AddWithValue("@storageId", storageId);
                     cmd.Parameters.AddWithValue("@agentID", agentID);
                     cmd.Parameters.AddWithValue("@prepGUID", prepGUID);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return false;
+        }
+
+        public bool UpdatePrepBarcodes()
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "UPDATE preparation SET Barcode = PreparationID WHERE CollectionMemberID = @CollectionID AND Barcode IS NULL";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@CollectionID", collectionID);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return false;
+        }
+
+        public bool UpdateStorageBarcodes()
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "UPDATE storage SET " + storageBarcodeField + " = StorageID WHERE " + storageBarcodeField + " IS NULL";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.ExecuteNonQuery();
                     return true;
                 }

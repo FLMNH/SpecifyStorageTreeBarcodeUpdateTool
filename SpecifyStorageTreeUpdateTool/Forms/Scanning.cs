@@ -144,5 +144,29 @@ namespace SpecifyStorageTreeUpdateTool
             Forms.ConfigForm cf = new Forms.ConfigForm(sp);
             cf.ShowDialog();
         }
+
+        private void updatePrepBarcodesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sp.UpdatePrepBarcodes())
+            {
+                MessageBox.Show("Empty preparation barcodes filled.Yum!");
+            }
+            else
+            {
+                MessageBox.Show("Failed to update empty preparation barcodes. Might want to check on that.");
+            }
+        }
+
+        private void updateStorageBarcodesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sp.UpdateStorageBarcodes())
+            {
+                MessageBox.Show("Empty storage node barcodes filled. Yum!");
+            }
+            else
+            {
+                MessageBox.Show("Failed to update empty storage barcodes. Might want to check on that. Is the field set correctly in config?");
+            }
+        }
     }
 }

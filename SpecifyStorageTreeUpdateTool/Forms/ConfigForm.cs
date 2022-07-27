@@ -25,12 +25,16 @@ namespace SpecifyStorageTreeUpdateTool.Forms
             InitializeComponent();
             this.sp = sp;
             enableAuditLogCheckbox.Checked = sp.LoggingEnabled;
+            tbStorageBarcodeField.Text = sp.StorageBarcodeFieldName;
             initDone = true;
             
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            sp.StorageBarcodeFieldName = tbStorageBarcodeField.Text;
+            Properties.Settings.Default.StorageBarcodeField = sp.StorageBarcodeFieldName;
+            Properties.Settings.Default.Save(); 
             this.Close();
         }
 
