@@ -367,6 +367,31 @@ namespace SpecifyStorageTreeUpdateTool
             return String.Empty;
         }
 
+        public List<int> GetContainerLocationPrepIDs(string containerID)
+        {
+            List<int> prepIDs = new List<int>();
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "SELECT PreparationID FROM preparation WHERE text2 = @containerID";
+                    MySqlCommand cmd = new MySqlCommand(sql,conn);
+                    cmd.Parameters.AddWithValue("@containerID",containerID);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        prepIDs.Add(reader.GetInt32(0));
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return prepIDs;
+        }
+
         public bool IsValidStorageID(int id)
         {
             if (isConnected)
@@ -385,6 +410,34 @@ namespace SpecifyStorageTreeUpdateTool
                     {
                         int r = Convert.ToInt32(result);
                         if (r == 1) { return true; }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return false;
+        }
+
+        public bool IsValidContainerID(string containerID)
+        {
+            if (isConnected && containerID != null && containerID != String.Empty)
+            {
+                try
+                {
+                    string sql = "SELECT count(text2) FROM preparation WHERE text2 = @containerID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("containerID", containerID);
+                    object result = cmd.ExecuteScalar();
+                    if (result == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        int r = Convert.ToInt32(result);
+                        if (r >= 1) { return true; }
                     }
                 }
                 catch (MySqlException ex)
