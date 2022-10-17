@@ -36,6 +36,8 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updatePrepBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateStorageBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -54,8 +56,6 @@
             this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.updatePrepBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateStorageBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -66,13 +66,15 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.systemToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1073, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(1171, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -82,7 +84,7 @@
             this.saveScanHistoryToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveScanHistoryToolStripMenuItem
@@ -106,22 +108,36 @@
             this.updatePrepBarcodesToolStripMenuItem,
             this.updateStorageBarcodesToolStripMenuItem});
             this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            this.systemToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.systemToolStripMenuItem.Size = new System.Drawing.Size(57, 22);
             this.systemToolStripMenuItem.Text = "System";
             // 
             // configToolStripMenuItem
             // 
             this.configToolStripMenuItem.Name = "configToolStripMenuItem";
-            this.configToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.configToolStripMenuItem.Text = "Config";
             this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
+            // 
+            // updatePrepBarcodesToolStripMenuItem
+            // 
+            this.updatePrepBarcodesToolStripMenuItem.Name = "updatePrepBarcodesToolStripMenuItem";
+            this.updatePrepBarcodesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.updatePrepBarcodesToolStripMenuItem.Text = "Update Prep Barcodes";
+            this.updatePrepBarcodesToolStripMenuItem.Click += new System.EventHandler(this.updatePrepBarcodesToolStripMenuItem_Click);
+            // 
+            // updateStorageBarcodesToolStripMenuItem
+            // 
+            this.updateStorageBarcodesToolStripMenuItem.Name = "updateStorageBarcodesToolStripMenuItem";
+            this.updateStorageBarcodesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.updateStorageBarcodesToolStripMenuItem.Text = "UpdateStorage Barcodes";
+            this.updateStorageBarcodesToolStripMenuItem.Click += new System.EventHandler(this.updateStorageBarcodesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -140,7 +156,7 @@
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(1018, 105);
+            this.button1.Location = new System.Drawing.Point(1042, 105);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 45);
             this.button1.TabIndex = 9;
@@ -158,7 +174,7 @@
             this.tbOutput.Name = "tbOutput";
             this.tbOutput.ReadOnly = true;
             this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOutput.Size = new System.Drawing.Size(1073, 635);
+            this.tbOutput.Size = new System.Drawing.Size(1171, 522);
             this.tbOutput.TabIndex = 7;
             this.toolTip1.SetToolTip(this.tbOutput, "Scan History");
             this.tbOutput.WordWrap = false;
@@ -175,15 +191,16 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusSpacer,
             this.toolStripStatusUserName,
             this.toolStripStatusLabelCollection,
             this.toolStripStatusDatabase,
             this.toolStripStatusServer});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 819);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 723);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1073, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1171, 24);
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -193,7 +210,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.toolStripStatusSpacer.Name = "toolStripStatusSpacer";
-            this.toolStripStatusSpacer.Size = new System.Drawing.Size(825, 19);
+            this.toolStripStatusSpacer.Size = new System.Drawing.Size(923, 19);
             this.toolStripStatusSpacer.Spring = true;
             this.toolStripStatusSpacer.Text = "    ";
             this.toolStripStatusSpacer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -242,10 +259,10 @@
             this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfo.Location = new System.Drawing.Point(369, 119);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(610, 16);
+            this.lblInfo.Size = new System.Drawing.Size(674, 16);
             this.lblInfo.TabIndex = 11;
-            this.lblInfo.Text = "Shelf labels are storage.StorageID with a prefix of \"SHELF\". Prep lables are prep" +
-    "aration.PreparationID";
+            this.lblInfo.Text = "Storage Location labels are storage.StorageID with a prefix of \"SLOC\". Prep label" +
+    "s are preparation.PreparationID";
             // 
             // lblStatus
             // 
@@ -277,8 +294,8 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.tbOutput);
-            this.splitContainer.Size = new System.Drawing.Size(1073, 795);
-            this.splitContainer.SplitterDistance = 156;
+            this.splitContainer.Size = new System.Drawing.Size(1171, 699);
+            this.splitContainer.SplitterDistance = 173;
             this.splitContainer.TabIndex = 11;
             // 
             // lblScanCount
@@ -311,32 +328,19 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
             // 
-            // updatePrepBarcodesToolStripMenuItem
-            // 
-            this.updatePrepBarcodesToolStripMenuItem.Name = "updatePrepBarcodesToolStripMenuItem";
-            this.updatePrepBarcodesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.updatePrepBarcodesToolStripMenuItem.Text = "Update Prep Barcodes";
-            this.updatePrepBarcodesToolStripMenuItem.Click += new System.EventHandler(this.updatePrepBarcodesToolStripMenuItem_Click);
-            // 
-            // updateStorageBarcodesToolStripMenuItem
-            // 
-            this.updateStorageBarcodesToolStripMenuItem.Name = "updateStorageBarcodesToolStripMenuItem";
-            this.updateStorageBarcodesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.updateStorageBarcodesToolStripMenuItem.Text = "UpdateStorage Barcodes";
-            this.updateStorageBarcodesToolStripMenuItem.Click += new System.EventHandler(this.updateStorageBarcodesToolStripMenuItem_Click);
-            // 
             // Scanning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1073, 843);
+            this.ClientSize = new System.Drawing.Size(1171, 747);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Scanning";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Specify Storage Tree Update Tool";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
