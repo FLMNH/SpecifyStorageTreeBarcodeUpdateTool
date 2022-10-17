@@ -53,26 +53,34 @@ namespace SpecifyStorageTreeUpdateTool
         private void processInput(string input)
         {
             lblError.Text = String.Empty;
-            if (input.Length > 5 && input.Substring(0,5).Equals("SHELF"))
+            if( (input.Length > 5 && input.Substring(0,5).Equals("SHELF")) || (input.Length > 4 && input.Substring(0,4).Equals("SLOC")) )
             {
                 try
                 {
-                    if (sp.IsValidStorageID(int.Parse(input.Substring(5))))
+                    if (input.Substring(0, 4).Equals("SLOC"))
+                    {
+                        storageID = int.Parse(input.Substring(4));
+                    }
+                    else if (input.Substring(0, 5).Equals("SHELF"))
                     {
                         storageID = int.Parse(input.Substring(5));
-                        string shelfName = sp.GetStorageIDName(storageID);
-                        lblStatus.Text = "Shelf set to " + shelfName + ".";
-                        tbOutput.AppendText("Shelf set to " + shelfName + ".");
+                    }
+                    if (sp.IsValidStorageID(storageID))
+                    {
+                        string sLocName = sp.GetStorageIDName(storageID);
+                        lblStatus.Text = "Storage Location set to " + sLocName + ".";
+                        tbOutput.AppendText("Storage Location set to " + sLocName + ".");
                         tbOutput.AppendText(Environment.NewLine);
                     }
                     else
                     {
-                        lblError.Text = "Bad shelf ID " + input.Substring(5) + ". Scan shelf label to begin.";
+                        storageID = -1;
+                        lblError.Text = "Bad Storage Location " + input + ". Scan shelf label to begin.";
                     }
                 }
                 catch
                 {
-                    lblError.Text = "Bad shelf ID " + input.Substring(5) + ". Scan shelf label to begin.";
+                    lblError.Text = "Bad Storage Location " + input + ". Scan a storage location label to begin.";
                 }
                 
             }
