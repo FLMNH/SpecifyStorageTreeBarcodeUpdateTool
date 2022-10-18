@@ -84,6 +84,35 @@ namespace SpecifyStorageTreeUpdateTool
                 }
                 
             }
+            else if (input.Length > 5 && input.Substring(0,4).Equals("CLOC"))
+            {
+                string containerID = input.Substring(4);
+                if (storageID != -1 && sp.IsValidContainerID(containerID))
+                {
+                    tbOutput.AppendText("Begin processing Container Location: " + containerID + ".");
+                    tbOutput.AppendText(Environment.NewLine);
+                    List<int> prepIDs = sp.GetContainerLocationPrepIDs(containerID);
+                    foreach (int prepID in prepIDs)
+                    {
+                        if (sp.UpdatePreparationStorageID(prepID,storageID))
+                        {
+                            string storageLocationName = sp.GetStorageIDName(storageID);
+                            tbOutput.AppendText(sp.GetPrepName(prepID) + " shelved to " + storageLocationName);
+                            tbOutput.AppendText(Environment.NewLine);
+                            if (sp.LoggingEnabled)
+                                sp.Log(prepID, storageLocationName, storageID);
+                            scanCount++;
+                            lblScanCount.Text = "Scan Count: " + scanCount.ToString();
+                        }
+                        else
+                        {
+                            lblError.Text = prepID.ToString() + " not valud prep ID.";
+                        }
+                    }
+                    tbOutput.AppendText("End processing Container Location: " + containerID + ".");
+                    tbOutput.AppendText(Environment.NewLine);
+                }
+            }
             else if (storageID != -1)
             {
                 try
