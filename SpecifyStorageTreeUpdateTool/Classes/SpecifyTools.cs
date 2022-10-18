@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
@@ -611,6 +612,64 @@ namespace SpecifyStorageTreeUpdateTool
                 MessageBox.Show(ex.ToString());
             }
             return false;
+        }
+
+        public DataSet GetScanLog(DateTime beginDate,DateTime endDate, int? prepID, int? storageID, string userName)
+        {
+            DataSet ds = new DataSet();
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = @"SELECT 
+	                                    l.PrepId AS PrepBarcode,
+                                        l.ScannedToFullName,
+                                        l.NewStorageId AS ScannedToLoc,
+                                        u.Name,
+                                        l.ScanTimestamp
+                                    FROM 
+	                                    fmstoragescanninglog l 
+                                        inner join agent a ON l.ScannedByAgentID = a.AgentID
+                                        inner join specifyuser u ON a.SpecifyUserID = u.SpecifyUserID
+                                    WHERE
+                                        l.ScanTimestamp >= @beginDate AND l.ScanTimestamp <= @endDate ";
+                    if (prepID.HasValue)
+                    {
+                        sql += " AND l.PrepID = @prepID";
+                    }
+                    if (storageID.HasValue)
+                    {
+                        sql += " AND l.NewStorageID = @storageID";
+                    }
+                    if (userName != null)
+                    {
+                        sql += " AND u.Name = @userName";
+                    }
+                    sql += " ORDER BY l.ScanTimestamp DESC;";
+                    MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@beginDate", beginDate);
+                    da.SelectCommand.Parameters.AddWithValue("@endDate", endDate);
+                    if (prepID.HasValue)
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@prepID", prepID);
+                    }
+                    if (storageID.HasValue)
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@storageID", storageID);
+                    }
+                    if (userName != null)
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@userName", userName);
+                    }
+                    MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
+                    da.Fill(ds, "Logs");
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return ds;
         }
 
         public bool CreateLogTable()

@@ -38,6 +38,8 @@
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatePrepBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateStorageBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scanLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -56,8 +58,6 @@
             this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scanLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -134,6 +134,22 @@
             this.updateStorageBarcodesToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.updateStorageBarcodesToolStripMenuItem.Text = "UpdateStorage Barcodes";
             this.updateStorageBarcodesToolStripMenuItem.Click += new System.EventHandler(this.updateStorageBarcodesToolStripMenuItem_Click);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.scanLogToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // scanLogToolStripMenuItem
+            // 
+            this.scanLogToolStripMenuItem.Name = "scanLogToolStripMenuItem";
+            this.scanLogToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.scanLogToolStripMenuItem.Text = "Scan Log";
+            this.scanLogToolStripMenuItem.Visible = false;
+            this.scanLogToolStripMenuItem.Click += new System.EventHandler(this.scanLogToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -273,9 +289,9 @@
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.Location = new System.Drawing.Point(28, 77);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(199, 20);
+            this.lblStatus.Size = new System.Drawing.Size(287, 20);
             this.lblStatus.TabIndex = 10;
-            this.lblStatus.Text = "Scan a shelf label to begin.";
+            this.lblStatus.Text = "Scan a Storage Location label to begin.";
             // 
             // splitContainer
             // 
@@ -330,22 +346,6 @@
             this.lblTitle.Size = new System.Drawing.Size(499, 37);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
-            // 
-            // reportsToolStripMenuItem
-            // 
-            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scanLogToolStripMenuItem});
-            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
-            this.reportsToolStripMenuItem.Text = "Reports";
-            // 
-            // scanLogToolStripMenuItem
-            // 
-            this.scanLogToolStripMenuItem.Name = "scanLogToolStripMenuItem";
-            this.scanLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.scanLogToolStripMenuItem.Text = "Scan Log";
-            this.scanLogToolStripMenuItem.Visible = false;
-            this.scanLogToolStripMenuItem.Click += new System.EventHandler(this.scanLogToolStripMenuItem_Click);
             // 
             // Scanning
             // 
