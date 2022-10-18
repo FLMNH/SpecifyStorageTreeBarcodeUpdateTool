@@ -65,10 +65,10 @@ namespace SpecifyStorageTreeUpdateTool
                     this.database = dbName;
                     this.server = dbServer;
                     isConnected = true;
-                    this.logTableExists = getLogTableExists();
+                    this.logTableExists = GetLogTableExists();
                     this.masterUsername =master[0];
                     this.masterPassword =master[1];
-                    this.loggingEnabled = getLogTableExists();
+                    this.loggingEnabled = GetLogTableExists();
                     if (hasPreparationModify(userName, userPassword, collectionName))
                     {
                         this.collectionName = collectionName;
@@ -589,7 +589,7 @@ namespace SpecifyStorageTreeUpdateTool
             return false;
         }
 
-        private bool getLogTableExists()
+        public bool GetLogTableExists()
         {
             try
             {
@@ -629,7 +629,7 @@ namespace SpecifyStorageTreeUpdateTool
                                 PRIMARY KEY (`fmstoragescanninglogId`));";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.ExecuteScalar();
-                    this.logTableExists = getLogTableExists();
+                    this.logTableExists = GetLogTableExists();
                     return this.logTableExists;
                 }                
             }

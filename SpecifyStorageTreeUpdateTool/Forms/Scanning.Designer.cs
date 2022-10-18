@@ -56,6 +56,8 @@
             this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scanLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -70,11 +72,12 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.systemToolStripMenuItem,
+            this.reportsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1171, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1244, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -174,7 +177,7 @@
             this.tbOutput.Name = "tbOutput";
             this.tbOutput.ReadOnly = true;
             this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOutput.Size = new System.Drawing.Size(1171, 522);
+            this.tbOutput.Size = new System.Drawing.Size(1244, 672);
             this.tbOutput.TabIndex = 7;
             this.toolTip1.SetToolTip(this.tbOutput, "Scan History");
             this.tbOutput.WordWrap = false;
@@ -198,9 +201,9 @@
             this.toolStripStatusLabelCollection,
             this.toolStripStatusDatabase,
             this.toolStripStatusServer});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 723);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 921);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1171, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1244, 24);
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -210,7 +213,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.toolStripStatusSpacer.Name = "toolStripStatusSpacer";
-            this.toolStripStatusSpacer.Size = new System.Drawing.Size(923, 19);
+            this.toolStripStatusSpacer.Size = new System.Drawing.Size(996, 19);
             this.toolStripStatusSpacer.Spring = true;
             this.toolStripStatusSpacer.Text = "    ";
             this.toolStripStatusSpacer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -294,8 +297,8 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.tbOutput);
-            this.splitContainer.Size = new System.Drawing.Size(1171, 699);
-            this.splitContainer.SplitterDistance = 173;
+            this.splitContainer.Size = new System.Drawing.Size(1244, 897);
+            this.splitContainer.SplitterDistance = 221;
             this.splitContainer.TabIndex = 11;
             // 
             // lblScanCount
@@ -328,12 +331,28 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
             // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.scanLogToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // scanLogToolStripMenuItem
+            // 
+            this.scanLogToolStripMenuItem.Name = "scanLogToolStripMenuItem";
+            this.scanLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.scanLogToolStripMenuItem.Text = "Scan Log";
+            this.scanLogToolStripMenuItem.Visible = false;
+            this.scanLogToolStripMenuItem.Click += new System.EventHandler(this.scanLogToolStripMenuItem_Click);
+            // 
             // Scanning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1171, 747);
+            this.ClientSize = new System.Drawing.Size(1244, 945);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -385,6 +404,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCollection;
         private System.Windows.Forms.ToolStripMenuItem updatePrepBarcodesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateStorageBarcodesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scanLogToolStripMenuItem;
     }
 }
 

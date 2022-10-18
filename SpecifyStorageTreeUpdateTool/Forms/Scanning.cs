@@ -30,6 +30,10 @@ namespace SpecifyStorageTreeUpdateTool
             toolStripStatusDatabase.Text = sp.Database;
             toolStripStatusServer.Text = sp.Server;
             toolStripStatusLabelCollection.Text = sp.CollectionName;
+            if (sp.GetLogTableExists())
+            {
+                scanLogToolStripMenuItem.Visible = true;
+            } 
             tbOutput.AppendText("Start " + sp.AgentName + " using " + sp.Database + " on " + sp.Server + " at " + DateTime.Now.ToString() + ".");
             tbOutput.AppendText(Environment.NewLine);
             tbInput.Focus();
@@ -204,6 +208,12 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 MessageBox.Show("Failed to update empty storage barcodes. Might want to check on that. Is the field set correctly in config?");
             }
+        }
+
+        private void scanLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ScanLog form = new Forms.ScanLog(sp);
+            form.ShowDialog();
         }
     }
 }
