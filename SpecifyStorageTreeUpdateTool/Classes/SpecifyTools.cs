@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
@@ -25,6 +26,7 @@ namespace SpecifyStorageTreeUpdateTool
         private string masterPassword;
         private bool loggingEnabled;
         private string storageBarcodeField;
+        private string prepContainerIDField;
 
         public bool IsConnected { get { return isConnected; } }
         public bool IsAuthorized { get { return isAuthorized; } }
@@ -40,6 +42,11 @@ namespace SpecifyStorageTreeUpdateTool
         public string StorageBarcodeFieldName { 
             get { return storageBarcodeField; } 
             set { storageBarcodeField = value; }    
+        }
+        public string PrepContainerIDField
+        {
+            get { return prepContainerIDField; }
+            set { prepContainerIDField = value; }
         }
 
         public SpecifyTools()
@@ -65,10 +72,10 @@ namespace SpecifyStorageTreeUpdateTool
                     this.database = dbName;
                     this.server = dbServer;
                     isConnected = true;
-                    this.logTableExists = getLogTableExists();
+                    this.logTableExists = GetLogTableExists();
                     this.masterUsername =master[0];
                     this.masterPassword =master[1];
-                    this.loggingEnabled = getLogTableExists();
+                    this.loggingEnabled = GetLogTableExists();
                     if (hasPreparationModify(userName, userPassword, collectionName))
                     {
                         this.collectionName = collectionName;
@@ -82,6 +89,15 @@ namespace SpecifyStorageTreeUpdateTool
                     else
                     {
                         storageBarcodeField = Properties.Settings.Default.StorageBarcodeField;
+                    }
+                    if (Properties.Settings.Default.PrepContainerIDField == String.Empty)
+                    {
+                        Properties.Settings.Default.PrepContainerIDField = "text2";
+                        prepContainerIDField = "text2";
+                    }
+                    else
+                    {
+                        prepContainerIDField = Properties.Settings.Default.PrepContainerIDField;
                     }
                 }
             }
@@ -374,7 +390,7 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 try
                 {
-                    string sql = "SELECT PreparationID FROM preparation WHERE text2 = @containerID";
+                    string sql = "SELECT PreparationID FROM preparation WHERE " + prepContainerIDField.Replace(" ","") + " = @containerID";
                     MySqlCommand cmd = new MySqlCommand(sql,conn);
                     cmd.Parameters.AddWithValue("@containerID",containerID);
                     MySqlDataReader reader = cmd.ExecuteReader();
@@ -589,7 +605,7 @@ namespace SpecifyStorageTreeUpdateTool
             return false;
         }
 
-        private bool getLogTableExists()
+        public bool GetLogTableExists()
         {
             try
             {
@@ -613,6 +629,64 @@ namespace SpecifyStorageTreeUpdateTool
             return false;
         }
 
+        public DataSet GetScanLog(DateTime beginDate,DateTime endDate, int? prepID, int? storageID, string userName)
+        {
+            DataSet ds = new DataSet();
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = @"SELECT 
+	                                    l.PrepId AS PrepBarcode,
+                                        l.ScannedToFullName,
+                                        l.NewStorageId AS ScannedToLoc,
+                                        u.Name,
+                                        l.ScanTimestamp
+                                    FROM 
+	                                    fmstoragescanninglog l 
+                                        inner join agent a ON l.ScannedByAgentID = a.AgentID
+                                        inner join specifyuser u ON a.SpecifyUserID = u.SpecifyUserID
+                                    WHERE
+                                        l.ScanTimestamp >= @beginDate AND l.ScanTimestamp <= @endDate ";
+                    if (prepID.HasValue)
+                    {
+                        sql += " AND l.PrepID = @prepID";
+                    }
+                    if (storageID.HasValue)
+                    {
+                        sql += " AND l.NewStorageID = @storageID";
+                    }
+                    if (userName != null)
+                    {
+                        sql += " AND u.Name = @userName";
+                    }
+                    sql += " ORDER BY l.ScanTimestamp DESC;";
+                    MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@beginDate", beginDate);
+                    da.SelectCommand.Parameters.AddWithValue("@endDate", endDate);
+                    if (prepID.HasValue)
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@prepID", prepID);
+                    }
+                    if (storageID.HasValue)
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@storageID", storageID);
+                    }
+                    if (userName != null)
+                    {
+                        da.SelectCommand.Parameters.AddWithValue("@userName", userName);
+                    }
+                    MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
+                    da.Fill(ds, "Logs");
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return ds;
+        }
+
         public bool CreateLogTable()
         {
             try
@@ -629,7 +703,7 @@ namespace SpecifyStorageTreeUpdateTool
                                 PRIMARY KEY (`fmstoragescanninglogId`));";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.ExecuteScalar();
-                    this.logTableExists = getLogTableExists();
+                    this.logTableExists = GetLogTableExists();
                     return this.logTableExists;
                 }                
             }

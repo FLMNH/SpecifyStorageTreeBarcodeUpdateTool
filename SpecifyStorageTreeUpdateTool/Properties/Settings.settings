@@ -20,5 +20,8 @@
     <Setting Name="StorageBarcodeField" Type="System.String" Scope="User">
       <Value Profile="(Default)">number1</Value>
     </Setting>
+    <Setting Name="PrepContainerIDField" Type="System.String" Scope="User">
+      <Value Profile="(Default)">text2</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -26,6 +26,7 @@ namespace SpecifyStorageTreeUpdateTool.Forms
             this.sp = sp;
             enableAuditLogCheckbox.Checked = sp.LoggingEnabled;
             tbStorageBarcodeField.Text = sp.StorageBarcodeFieldName;
+            tbPrepContainerField.Text = sp.PrepContainerIDField;
             initDone = true;
             
         }
@@ -33,7 +34,9 @@ namespace SpecifyStorageTreeUpdateTool.Forms
         private void btnClose_Click(object sender, EventArgs e)
         {
             sp.StorageBarcodeFieldName = tbStorageBarcodeField.Text;
+            sp.PrepContainerIDField = tbPrepContainerField.Text;
             Properties.Settings.Default.StorageBarcodeField = sp.StorageBarcodeFieldName;
+            Properties.Settings.Default.PrepContainerIDField = sp.PrepContainerIDField;
             Properties.Settings.Default.Save(); 
             this.Close();
         }
