@@ -94,5 +94,17 @@ namespace SpecifyStorageTreeUpdateTool.Properties {
                 this["StorageBarcodeField"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("text2")]
+        public string PrepContainerIDField {
+            get {
+                return ((string)(this["PrepContainerIDField"]));
+            }
+            set {
+                this["PrepContainerIDField"] = value;
+            }
+        }
     }
 }

@@ -38,6 +38,8 @@
             this.CreateTableEnableLogginButton = new System.Windows.Forms.Button();
             this.lblStorageBarcodeField = new System.Windows.Forms.Label();
             this.tbStorageBarcodeField = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbPrepContainerField = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // WelcomeLabel
@@ -54,7 +56,7 @@
             // 
             this.enableAuditLogCheckbox.AutoSize = true;
             this.enableAuditLogCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enableAuditLogCheckbox.Location = new System.Drawing.Point(47, 140);
+            this.enableAuditLogCheckbox.Location = new System.Drawing.Point(51, 219);
             this.enableAuditLogCheckbox.Name = "enableAuditLogCheckbox";
             this.enableAuditLogCheckbox.Size = new System.Drawing.Size(316, 28);
             this.enableAuditLogCheckbox.TabIndex = 1;
@@ -65,7 +67,7 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(341, 358);
+            this.btnClose.Location = new System.Drawing.Point(345, 437);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(105, 39);
             this.btnClose.TabIndex = 2;
@@ -77,7 +79,7 @@
             // 
             this.MasterUserNameLabel.AutoSize = true;
             this.MasterUserNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MasterUserNameLabel.Location = new System.Drawing.Point(47, 197);
+            this.MasterUserNameLabel.Location = new System.Drawing.Point(51, 276);
             this.MasterUserNameLabel.Name = "MasterUserNameLabel";
             this.MasterUserNameLabel.Size = new System.Drawing.Size(158, 24);
             this.MasterUserNameLabel.TabIndex = 3;
@@ -88,7 +90,7 @@
             // 
             this.MasterPasswordLabel.AutoSize = true;
             this.MasterPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MasterPasswordLabel.Location = new System.Drawing.Point(47, 244);
+            this.MasterPasswordLabel.Location = new System.Drawing.Point(51, 323);
             this.MasterPasswordLabel.Name = "MasterPasswordLabel";
             this.MasterPasswordLabel.Size = new System.Drawing.Size(153, 24);
             this.MasterPasswordLabel.TabIndex = 4;
@@ -98,7 +100,7 @@
             // MasterUserNameTextBox
             // 
             this.MasterUserNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MasterUserNameTextBox.Location = new System.Drawing.Point(222, 195);
+            this.MasterUserNameTextBox.Location = new System.Drawing.Point(226, 274);
             this.MasterUserNameTextBox.Name = "MasterUserNameTextBox";
             this.MasterUserNameTextBox.Size = new System.Drawing.Size(224, 29);
             this.MasterUserNameTextBox.TabIndex = 5;
@@ -107,7 +109,7 @@
             // MasterPasswordTextBox
             // 
             this.MasterPasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MasterPasswordTextBox.Location = new System.Drawing.Point(222, 242);
+            this.MasterPasswordTextBox.Location = new System.Drawing.Point(226, 321);
             this.MasterPasswordTextBox.Name = "MasterPasswordTextBox";
             this.MasterPasswordTextBox.Size = new System.Drawing.Size(224, 29);
             this.MasterPasswordTextBox.TabIndex = 6;
@@ -117,7 +119,7 @@
             // CreateTableEnableLogginButton
             // 
             this.CreateTableEnableLogginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateTableEnableLogginButton.Location = new System.Drawing.Point(69, 291);
+            this.CreateTableEnableLogginButton.Location = new System.Drawing.Point(73, 370);
             this.CreateTableEnableLogginButton.Name = "CreateTableEnableLogginButton";
             this.CreateTableEnableLogginButton.Size = new System.Drawing.Size(377, 39);
             this.CreateTableEnableLogginButton.TabIndex = 7;
@@ -144,11 +146,31 @@
             this.tbStorageBarcodeField.Size = new System.Drawing.Size(195, 29);
             this.tbStorageBarcodeField.TabIndex = 9;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(47, 147);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(183, 24);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Prep Container Field";
+            // 
+            // tbPrepContainerField
+            // 
+            this.tbPrepContainerField.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPrepContainerField.Location = new System.Drawing.Point(251, 147);
+            this.tbPrepContainerField.Name = "tbPrepContainerField";
+            this.tbPrepContainerField.Size = new System.Drawing.Size(195, 29);
+            this.tbPrepContainerField.TabIndex = 11;
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 437);
+            this.ClientSize = new System.Drawing.Size(634, 560);
+            this.Controls.Add(this.tbPrepContainerField);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tbStorageBarcodeField);
             this.Controls.Add(this.lblStorageBarcodeField);
             this.Controls.Add(this.CreateTableEnableLogginButton);
@@ -178,5 +200,7 @@
         private System.Windows.Forms.Button CreateTableEnableLogginButton;
         private System.Windows.Forms.Label lblStorageBarcodeField;
         private System.Windows.Forms.TextBox tbStorageBarcodeField;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbPrepContainerField;
     }
 }

@@ -26,6 +26,7 @@ namespace SpecifyStorageTreeUpdateTool
         private string masterPassword;
         private bool loggingEnabled;
         private string storageBarcodeField;
+        private string prepContainerIDField;
 
         public bool IsConnected { get { return isConnected; } }
         public bool IsAuthorized { get { return isAuthorized; } }
@@ -41,6 +42,11 @@ namespace SpecifyStorageTreeUpdateTool
         public string StorageBarcodeFieldName { 
             get { return storageBarcodeField; } 
             set { storageBarcodeField = value; }    
+        }
+        public string PrepContainerIDField
+        {
+            get { return prepContainerIDField; }
+            set { prepContainerIDField = value; }
         }
 
         public SpecifyTools()
@@ -83,6 +89,15 @@ namespace SpecifyStorageTreeUpdateTool
                     else
                     {
                         storageBarcodeField = Properties.Settings.Default.StorageBarcodeField;
+                    }
+                    if (Properties.Settings.Default.PrepContainerIDField == String.Empty)
+                    {
+                        Properties.Settings.Default.PrepContainerIDField = "text2";
+                        prepContainerIDField = "text2";
+                    }
+                    else
+                    {
+                        prepContainerIDField = Properties.Settings.Default.PrepContainerIDField;
                     }
                 }
             }
@@ -375,7 +390,7 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 try
                 {
-                    string sql = "SELECT PreparationID FROM preparation WHERE text2 = @containerID";
+                    string sql = "SELECT PreparationID FROM preparation WHERE " + prepContainerIDField.Replace(" ","") + " = @containerID";
                     MySqlCommand cmd = new MySqlCommand(sql,conn);
                     cmd.Parameters.AddWithValue("@containerID",containerID);
                     MySqlDataReader reader = cmd.ExecuteReader();
