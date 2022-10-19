@@ -19,6 +19,11 @@ The application is backwards compatible and will process both prefixes of "SHELF
 For rapid proof of concept testing you may use the Libre Barcode 39 Text font from https://fonts.google.com/specimen/Libre+Barcode+39+Text for label generation. Code 39 uses asterisks as start stop delimiters, which makes for easy generation. Code 39 is nearly ubiquitous with
 scanners which keeps things simple.
 
+As of version 1.5.0, the application supports Container Location scanning as well. Container Location labels are constructed by adding the prefix "CLOC" 
+to the ContainerID field on preparation. PrepContainerIDField has been added as config parameter in the config form to accommodate differing schemas.
+When a CLOC label is scanned, the application sets the storage location for all preparations with the scanned ContainerID. Container Location scanning 
+improves shelving workflows for tanks, large jars, and vial lots which contain preps.
+
 <img width="538" alt="LoginScreen" src="https://user-images.githubusercontent.com/81316350/146015801-38997559-b00b-404a-82b5-398cf790a6ea.png">
 
 
