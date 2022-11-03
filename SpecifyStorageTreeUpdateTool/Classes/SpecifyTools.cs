@@ -120,11 +120,8 @@ namespace SpecifyStorageTreeUpdateTool
                 }
                 else if (userType.Equals("LimitedAccess"))
                 {
-                    bool auth = isLimitedUserWithPrepModify(getSpPrincipalID(getSpecifyUserID(username, password), collectionName));
-                    if (!auth)
-                    {
-                        return auth;
-                    }
+                    return isLimitedUserWithPrepModify(getSpPrincipalID(getSpecifyUserID(username, password), collectionName)) ||
+                        isLimitedUserWithPrepModify(getLimitedAccessSpPrincipalID(username, password, collectionName));
                 }
             }
             return false;
@@ -145,7 +142,7 @@ namespace SpecifyStorageTreeUpdateTool
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@spPrincipalID", spPrincipalID);
                 object result = cmd.ExecuteScalar();
-                if (result != DBNull.Value)
+                if (result != null && result != DBNull.Value)
                 {
                     return result.ToString().Contains("modify");
                 }
@@ -247,6 +244,36 @@ namespace SpecifyStorageTreeUpdateTool
                 if (result != null)
                 {
                     return Convert.ToInt32(result.ToString());
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return -1;
+        }
+
+        private int getLimitedAccessSpPrincipalID(string username, string password, string collectionName)
+        {
+            try
+            {
+                string sql = @"select 
+                                    spprincipal.SpPrincipalID
+                                from
+                                    spprincipal
+                                    inner join specifyuser_spprincipal on spprincipal.SpPrincipalID = specifyuser_spprincipal.SpPrincipalID
+                                    inner join specifyuser on specifyuser_spprincipal.SpecifyUserID = specifyuser.SpecifyUserID
+                                where
+                                    spprincipal.userGroupScopeID = @collectionID
+                                    and GroupSubClass = 'edu.ku.brc.af.auth.specify.principal.GroupPrincipal'
+                                    and specifyuser.SpecifyUserID = @specifyUserID";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@collectionID", getCollectionID(collectionName));
+                cmd.Parameters.AddWithValue("@specifyUserID", getSpecifyUserID(username, password));
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    return Int32.Parse( result.ToString() );
                 }
             }
             catch (MySqlException ex)
