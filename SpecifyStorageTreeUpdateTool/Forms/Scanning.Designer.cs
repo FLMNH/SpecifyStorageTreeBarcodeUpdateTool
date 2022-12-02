@@ -321,7 +321,7 @@
             // 
             this.lblScanCount.AutoSize = true;
             this.lblScanCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScanCount.Location = new System.Drawing.Point(909, 35);
+            this.lblScanCount.Location = new System.Drawing.Point(909, 53);
             this.lblScanCount.Name = "lblScanCount";
             this.lblScanCount.Size = new System.Drawing.Size(101, 20);
             this.lblScanCount.TabIndex = 13;

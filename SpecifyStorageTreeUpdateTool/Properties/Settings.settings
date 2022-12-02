@@ -23,5 +23,8 @@
     <Setting Name="PrepContainerIDField" Type="System.String" Scope="User">
       <Value Profile="(Default)">text2</Value>
     </Setting>
+    <Setting Name="VerifyCollectionCodeInBarcode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
