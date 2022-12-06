@@ -148,6 +148,11 @@ namespace SpecifyStorageTreeUpdateTool
                     tbOutput.AppendText("End processing Container Location: " + containerID + ".");
                     tbOutput.AppendText(Environment.NewLine);
                 }
+                else
+                {
+                    tbOutput.AppendText("ContainerID " + containerID + " not found.");
+                    tbOutput.AppendText(Environment.NewLine);
+                }
             }
             else if (storageID != -1)
             {

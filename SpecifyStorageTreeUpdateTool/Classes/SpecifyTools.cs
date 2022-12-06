@@ -469,7 +469,7 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 try
                 {
-                    string sql = "SELECT count(text2) FROM preparation WHERE text2 = @containerID";
+                    string sql = "SELECT count(text2) FROM preparation WHERE " + prepContainerIDField + " = @containerID";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("containerID", containerID);
                     object result = cmd.ExecuteScalar();
