@@ -106,5 +106,17 @@ namespace SpecifyStorageTreeUpdateTool.Properties {
                 this["PrepContainerIDField"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool VerifyCollectionCodeInBarcode {
+            get {
+                return ((bool)(this["VerifyCollectionCodeInBarcode"]));
+            }
+            set {
+                this["VerifyCollectionCodeInBarcode"] = value;
+            }
+        }
     }
 }

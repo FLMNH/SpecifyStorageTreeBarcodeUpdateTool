@@ -57,17 +57,38 @@ namespace SpecifyStorageTreeUpdateTool
         private void processInput(string input)
         {
             lblError.Text = String.Empty;
-            if( (input.Length > 5 && input.Substring(0,5).Equals("SHELF")) || (input.Length > 4 && input.Substring(0,4).Equals("SLOC")) )
+            bool safeScan = Properties.Settings.Default.VerifyCollectionCodeInBarcode;
+            if ( (input.Length > 5 && input.Substring(0,5).Equals("SHELF")) || (input.Length > 4 && input.Substring(0,4).Equals("SLOC")) )
             {
                 try
                 {
                     if (input.Substring(0, 4).Equals("SLOC"))
                     {
-                        storageID = int.Parse(input.Substring(4));
+                        if (safeScan)
+                        {
+                            if (input.Substring(4,sp.CollectionName.Length).ToUpper().Equals(sp.CollectionName.ToUpper()))
+                            {
+                                storageID = int.Parse(input.Substring(4 + sp.CollectionName.Length));
+                            }
+                        }
+                        else
+                        {
+                            storageID = int.Parse(input.Substring(4));
+                        }
                     }
                     else if (input.Substring(0, 5).Equals("SHELF"))
                     {
-                        storageID = int.Parse(input.Substring(5));
+                        if (safeScan)
+                        {
+                            if (input.Substring(5,sp.CollectionName.Length).ToUpper().Equals(sp.CollectionName.ToUpper()))
+                            {
+                                storageID = int.Parse(input.Substring(5 + sp.CollectionName.Length));
+                            }
+                        }
+                        else
+                        {
+                            storageID = int.Parse(input.Substring(5));
+                        }
                     }
                     if (sp.IsValidStorageID(storageID))
                     {
@@ -90,7 +111,18 @@ namespace SpecifyStorageTreeUpdateTool
             }
             else if (input.Length > 5 && input.Substring(0,4).Equals("CLOC"))
             {
-                string containerID = input.Substring(4);
+                string containerID = "";
+                if (safeScan)
+                {
+                    if (input.Substring(4,sp.CollectionName.Length).ToUpper().Equals(sp.CollectionName.ToUpper()))
+                    {
+                        containerID = input.Substring(4 + sp.CollectionName.Length);
+                    }
+                }
+                else
+                {
+                    containerID = input.Substring(4);
+                }
                 if (storageID != -1 && sp.IsValidContainerID(containerID))
                 {
                     tbOutput.AppendText("Begin processing Container Location: " + containerID + ".");
@@ -116,16 +148,32 @@ namespace SpecifyStorageTreeUpdateTool
                     tbOutput.AppendText("End processing Container Location: " + containerID + ".");
                     tbOutput.AppendText(Environment.NewLine);
                 }
+                else
+                {
+                    tbOutput.AppendText("ContainerID " + containerID + " not found.");
+                    tbOutput.AppendText(Environment.NewLine);
+                }
             }
             else if (storageID != -1)
             {
                 try
                 {
-                    int prepID = Convert.ToInt32(input); 
+                    int prepID = 0;
+                    if (safeScan)
+                    {
+                        if (input.Substring(0, sp.CollectionName.Length).ToUpper().Equals(sp.CollectionName.ToUpper()))
+                        {
+                            prepID = Convert.ToInt32(input.Substring(sp.CollectionName.Length));
+                        }
+                    }
+                    else
+                    {
+                        prepID = Convert.ToInt32(input);
+                    }
                     if (sp.IsValidPrepID(prepID) && sp.UpdatePreparationStorageID(prepID, storageID))
                     {
                         string storageLocationName = sp.GetStorageIDName(storageID);
-                        tbOutput.AppendText(sp.GetPrepName(int.Parse(input)) + " shelved to " + storageLocationName);
+                        tbOutput.AppendText(sp.GetPrepName(prepID) + " shelved to " + storageLocationName);
                         tbOutput.AppendText(Environment.NewLine);
                         if (sp.LoggingEnabled)
                             sp.Log(prepID, storageLocationName, storageID);

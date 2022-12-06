@@ -40,6 +40,7 @@
             this.tbStorageBarcodeField = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbPrepContainerField = new System.Windows.Forms.TextBox();
+            this.verifyCollectionCodeInBarcodecheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // WelcomeLabel
@@ -56,7 +57,7 @@
             // 
             this.enableAuditLogCheckbox.AutoSize = true;
             this.enableAuditLogCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enableAuditLogCheckbox.Location = new System.Drawing.Point(51, 219);
+            this.enableAuditLogCheckbox.Location = new System.Drawing.Point(51, 252);
             this.enableAuditLogCheckbox.Name = "enableAuditLogCheckbox";
             this.enableAuditLogCheckbox.Size = new System.Drawing.Size(316, 28);
             this.enableAuditLogCheckbox.TabIndex = 1;
@@ -67,7 +68,7 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(345, 437);
+            this.btnClose.Location = new System.Drawing.Point(345, 470);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(105, 39);
             this.btnClose.TabIndex = 2;
@@ -79,7 +80,7 @@
             // 
             this.MasterUserNameLabel.AutoSize = true;
             this.MasterUserNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MasterUserNameLabel.Location = new System.Drawing.Point(51, 276);
+            this.MasterUserNameLabel.Location = new System.Drawing.Point(51, 309);
             this.MasterUserNameLabel.Name = "MasterUserNameLabel";
             this.MasterUserNameLabel.Size = new System.Drawing.Size(158, 24);
             this.MasterUserNameLabel.TabIndex = 3;
@@ -90,7 +91,7 @@
             // 
             this.MasterPasswordLabel.AutoSize = true;
             this.MasterPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MasterPasswordLabel.Location = new System.Drawing.Point(51, 323);
+            this.MasterPasswordLabel.Location = new System.Drawing.Point(51, 356);
             this.MasterPasswordLabel.Name = "MasterPasswordLabel";
             this.MasterPasswordLabel.Size = new System.Drawing.Size(153, 24);
             this.MasterPasswordLabel.TabIndex = 4;
@@ -100,7 +101,7 @@
             // MasterUserNameTextBox
             // 
             this.MasterUserNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MasterUserNameTextBox.Location = new System.Drawing.Point(226, 274);
+            this.MasterUserNameTextBox.Location = new System.Drawing.Point(226, 307);
             this.MasterUserNameTextBox.Name = "MasterUserNameTextBox";
             this.MasterUserNameTextBox.Size = new System.Drawing.Size(224, 29);
             this.MasterUserNameTextBox.TabIndex = 5;
@@ -109,7 +110,7 @@
             // MasterPasswordTextBox
             // 
             this.MasterPasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MasterPasswordTextBox.Location = new System.Drawing.Point(226, 321);
+            this.MasterPasswordTextBox.Location = new System.Drawing.Point(226, 354);
             this.MasterPasswordTextBox.Name = "MasterPasswordTextBox";
             this.MasterPasswordTextBox.Size = new System.Drawing.Size(224, 29);
             this.MasterPasswordTextBox.TabIndex = 6;
@@ -119,7 +120,7 @@
             // CreateTableEnableLogginButton
             // 
             this.CreateTableEnableLogginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateTableEnableLogginButton.Location = new System.Drawing.Point(73, 370);
+            this.CreateTableEnableLogginButton.Location = new System.Drawing.Point(73, 403);
             this.CreateTableEnableLogginButton.Name = "CreateTableEnableLogginButton";
             this.CreateTableEnableLogginButton.Size = new System.Drawing.Size(377, 39);
             this.CreateTableEnableLogginButton.TabIndex = 7;
@@ -164,11 +165,23 @@
             this.tbPrepContainerField.Size = new System.Drawing.Size(195, 29);
             this.tbPrepContainerField.TabIndex = 11;
             // 
+            // verifyCollectionCodeInBarcodecheckBox
+            // 
+            this.verifyCollectionCodeInBarcodecheckBox.AutoSize = true;
+            this.verifyCollectionCodeInBarcodecheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.verifyCollectionCodeInBarcodecheckBox.Location = new System.Drawing.Point(51, 205);
+            this.verifyCollectionCodeInBarcodecheckBox.Name = "verifyCollectionCodeInBarcodecheckBox";
+            this.verifyCollectionCodeInBarcodecheckBox.Size = new System.Drawing.Size(311, 28);
+            this.verifyCollectionCodeInBarcodecheckBox.TabIndex = 12;
+            this.verifyCollectionCodeInBarcodecheckBox.Text = "Verify Collection Code in Barcode";
+            this.verifyCollectionCodeInBarcodecheckBox.UseVisualStyleBackColor = true;
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 560);
+            this.Controls.Add(this.verifyCollectionCodeInBarcodecheckBox);
             this.Controls.Add(this.tbPrepContainerField);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbStorageBarcodeField);
@@ -202,5 +215,6 @@
         private System.Windows.Forms.TextBox tbStorageBarcodeField;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbPrepContainerField;
+        private System.Windows.Forms.CheckBox verifyCollectionCodeInBarcodecheckBox;
     }
 }
