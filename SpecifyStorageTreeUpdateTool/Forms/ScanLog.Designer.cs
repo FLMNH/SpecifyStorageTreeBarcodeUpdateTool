@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScanLog));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.buttonExport = new System.Windows.Forms.Button();
             this.labelRecordCount = new System.Windows.Forms.Label();
             this.buttonRunReport = new System.Windows.Forms.Button();
             this.textBoxScannedBy = new System.Windows.Forms.TextBox();
@@ -45,7 +47,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewLogs = new System.Windows.Forms.DataGridView();
-            this.buttonExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,15 +82,31 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridViewLogs);
-            this.splitContainer1.Size = new System.Drawing.Size(1465, 859);
-            this.splitContainer1.SplitterDistance = 153;
+            this.splitContainer1.Size = new System.Drawing.Size(1466, 858);
+            this.splitContainer1.SplitterDistance = 152;
             this.splitContainer1.SplitterWidth = 6;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonExport.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.buttonExport.FlatAppearance.BorderSize = 0;
+            this.buttonExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.buttonExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonExport.Image = ((System.Drawing.Image)(resources.GetObject("buttonExport.Image")));
+            this.buttonExport.Location = new System.Drawing.Point(1410, 97);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(44, 45);
+            this.buttonExport.TabIndex = 13;
+            this.buttonExport.UseVisualStyleBackColor = false;
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // labelRecordCount
             // 
             this.labelRecordCount.AutoSize = true;
-            this.labelRecordCount.Location = new System.Drawing.Point(1034, 107);
+            this.labelRecordCount.Location = new System.Drawing.Point(1034, 108);
             this.labelRecordCount.Name = "labelRecordCount";
             this.labelRecordCount.Size = new System.Drawing.Size(116, 20);
             this.labelRecordCount.TabIndex = 12;
@@ -97,7 +114,7 @@
             // 
             // buttonRunReport
             // 
-            this.buttonRunReport.Location = new System.Drawing.Point(841, 93);
+            this.buttonRunReport.Location = new System.Drawing.Point(842, 92);
             this.buttonRunReport.Name = "buttonRunReport";
             this.buttonRunReport.Size = new System.Drawing.Size(106, 34);
             this.buttonRunReport.TabIndex = 11;
@@ -107,9 +124,9 @@
             // 
             // textBoxScannedBy
             // 
-            this.textBoxScannedBy.Location = new System.Drawing.Point(667, 97);
+            this.textBoxScannedBy.Location = new System.Drawing.Point(668, 97);
             this.textBoxScannedBy.Name = "textBoxScannedBy";
-            this.textBoxScannedBy.Size = new System.Drawing.Size(137, 26);
+            this.textBoxScannedBy.Size = new System.Drawing.Size(138, 26);
             this.textBoxScannedBy.TabIndex = 10;
             // 
             // textBoxStorageID
@@ -220,35 +237,27 @@
             this.dataGridViewLogs.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewLogs.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewLogs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewLogs.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewLogs.Name = "dataGridViewLogs";
             this.dataGridViewLogs.ReadOnly = true;
             this.dataGridViewLogs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dataGridViewLogs.Size = new System.Drawing.Size(1465, 700);
+            this.dataGridViewLogs.Size = new System.Drawing.Size(1466, 700);
             this.dataGridViewLogs.TabIndex = 0;
-            // 
-            // buttonExport
-            // 
-            this.buttonExport.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.buttonExport.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.buttonExport.FlatAppearance.BorderSize = 0;
-            this.buttonExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.buttonExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExport.Image = ((System.Drawing.Image)(resources.GetObject("buttonExport.Image")));
-            this.buttonExport.Location = new System.Drawing.Point(1410, 97);
-            this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Size = new System.Drawing.Size(43, 45);
-            this.buttonExport.TabIndex = 13;
-            this.buttonExport.UseVisualStyleBackColor = false;
-            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // ScanLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1465, 859);
+            this.ClientSize = new System.Drawing.Size(1466, 858);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

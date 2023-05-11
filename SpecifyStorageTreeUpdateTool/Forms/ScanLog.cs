@@ -55,6 +55,7 @@ namespace SpecifyStorageTreeUpdateTool.Forms
             {
                 agent = textBoxScannedBy.Text;
             }
+            Cursor.Current = Cursors.WaitCursor;
             DataSet dsLog = sp.GetScanLog(dateTimePickerBeginDate.Value,
                                           dateTimePickerEndDate.Value,
                                           prepID,
@@ -63,6 +64,7 @@ namespace SpecifyStorageTreeUpdateTool.Forms
             dataGridViewLogs.DataSource = dsLog;
             dataGridViewLogs.DataMember = "Logs";
             labelRecordCount.Text = "Record Count: " + dsLog.Tables[0].Rows.Count;
+            Cursor.Current = Cursors.Default;
         }
 
         private void buttonExport_Click(object sender, EventArgs e)

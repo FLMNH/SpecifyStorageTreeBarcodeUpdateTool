@@ -668,11 +668,17 @@ namespace SpecifyStorageTreeUpdateTool
                                         l.ScannedToFullName,
                                         l.NewStorageId AS ScannedToLoc,
                                         u.Name,
-                                        l.ScanTimestamp
+                                        l.ScanTimestamp,
+                                        TRIM(LEADING '0' FROM co.CatalogNumber) AS CatalogNumber,
+                                        (SELECT t.FullName from determination d 
+                                        inner join taxon t on d.TaxonID = t.TaxonID 
+                                        where d.CollectionObjectID = co.CollectionObjectID and ifnull(d.IsCurrent,0) = 1) as Taxon
                                     FROM 
 	                                    fmstoragescanninglog l 
                                         inner join agent a ON l.ScannedByAgentID = a.AgentID
                                         inner join specifyuser u ON a.SpecifyUserID = u.SpecifyUserID
+                                        inner join preparation p on l.PrepId = p.PreparationID
+                                        inner join collectionobject co on p.CollectionObjectID = co.CollectionObjectID
                                     WHERE
                                         l.ScanTimestamp >= @beginDate AND l.ScanTimestamp <= @endDate ";
                     if (prepID.HasValue)
