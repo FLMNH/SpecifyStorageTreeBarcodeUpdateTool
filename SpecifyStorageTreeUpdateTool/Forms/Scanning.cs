@@ -16,6 +16,7 @@ namespace SpecifyStorageTreeUpdateTool
         private int storageID = -1;
         private SpecifyTools sp;
         private int scanCount;
+        private int slocCount = -1;
 
         public Scanning()
         {
@@ -93,9 +94,11 @@ namespace SpecifyStorageTreeUpdateTool
                     if (sp.IsValidStorageID(storageID))
                     {
                         string sLocName = sp.GetStorageIDName(storageID);
+                        slocCount = sp.GetSLOCCount(storageID);
                         lblStatus.Text = "Storage Location set to " + sLocName + ".";
                         tbOutput.AppendText("Storage Location set to " + sLocName + ".");
                         tbOutput.AppendText(Environment.NewLine);
+                        lblSLOCCount.Text = slocCount.ToString();
                     }
                     else
                     {
@@ -139,10 +142,12 @@ namespace SpecifyStorageTreeUpdateTool
                                 sp.Log(prepID, storageLocationName, storageID);
                             scanCount++;
                             lblScanCount.Text = "Scan Count: " + scanCount.ToString();
+                            slocCount = sp.GetSLOCCount(storageID);
+                            lblSLOCCount.Text = slocCount.ToString();
                         }
                         else
                         {
-                            lblError.Text = prepID.ToString() + " not valud prep ID.";
+                            lblError.Text = prepID.ToString() + " not valid prep ID.";
                         }
                     }
                     tbOutput.AppendText("End processing Container Location: " + containerID + ".");
@@ -179,6 +184,8 @@ namespace SpecifyStorageTreeUpdateTool
                             sp.Log(prepID, storageLocationName, storageID);
                         scanCount++;
                         lblScanCount.Text = "Scan Count: " + scanCount.ToString();
+                        slocCount = sp.GetSLOCCount(storageID);
+                        lblSLOCCount.Text = slocCount.ToString();
                     }
                     else
                     {

@@ -410,6 +410,29 @@ namespace SpecifyStorageTreeUpdateTool
             return String.Empty;
         }
 
+        public int GetSLOCCount(int storageId)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "select count(PreparationID) from preparation where StorageID = @storageID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@storageID", storageId);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Int32.Parse(result.ToString());
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return -1;
+        }
+
         public List<int> GetContainerLocationPrepIDs(string containerID)
         {
             List<int> prepIDs = new List<int>();
