@@ -58,6 +58,8 @@
             this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.lblSLOCCountLabel = new System.Windows.Forms.Label();
+            this.lblSLOCCount = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -302,6 +304,8 @@
             // 
             // splitContainer.Panel1
             // 
+            this.splitContainer.Panel1.Controls.Add(this.lblSLOCCount);
+            this.splitContainer.Panel1.Controls.Add(this.lblSLOCCountLabel);
             this.splitContainer.Panel1.Controls.Add(this.lblScanCount);
             this.splitContainer.Panel1.Controls.Add(this.lblError);
             this.splitContainer.Panel1.Controls.Add(this.button1);
@@ -321,7 +325,7 @@
             // 
             this.lblScanCount.AutoSize = true;
             this.lblScanCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScanCount.Location = new System.Drawing.Point(909, 53);
+            this.lblScanCount.Location = new System.Drawing.Point(900, 29);
             this.lblScanCount.Name = "lblScanCount";
             this.lblScanCount.Size = new System.Drawing.Size(101, 20);
             this.lblScanCount.TabIndex = 13;
@@ -346,6 +350,25 @@
             this.lblTitle.Size = new System.Drawing.Size(499, 37);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
+            // 
+            // lblSLOCCountLabel
+            // 
+            this.lblSLOCCountLabel.AutoSize = true;
+            this.lblSLOCCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSLOCCountLabel.Location = new System.Drawing.Point(28, 159);
+            this.lblSLOCCountLabel.Name = "lblSLOCCountLabel";
+            this.lblSLOCCountLabel.Size = new System.Drawing.Size(107, 20);
+            this.lblSLOCCountLabel.TabIndex = 14;
+            this.lblSLOCCountLabel.Text = "SLOC Count: ";
+            // 
+            // lblSLOCCount
+            // 
+            this.lblSLOCCount.AutoSize = true;
+            this.lblSLOCCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSLOCCount.Location = new System.Drawing.Point(141, 159);
+            this.lblSLOCCount.Name = "lblSLOCCount";
+            this.lblSLOCCount.Size = new System.Drawing.Size(0, 20);
+            this.lblSLOCCount.TabIndex = 15;
             // 
             // Scanning
             // 
@@ -406,6 +429,8 @@
         private System.Windows.Forms.ToolStripMenuItem updateStorageBarcodesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scanLogToolStripMenuItem;
+        private System.Windows.Forms.Label lblSLOCCountLabel;
+        private System.Windows.Forms.Label lblSLOCCount;
     }
 }
 

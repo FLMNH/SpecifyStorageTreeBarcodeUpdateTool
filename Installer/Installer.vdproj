@@ -912,15 +912,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Specify Storage Tree Update Tool"
-        "ProductCode" = "8:{1759ED8E-7BA4-424D-8EA4-79ABE92C45B4}"
-        "PackageCode" = "8:{65F0A6E3-CA7D-47F8-959E-519FFB7D6592}"
+        "ProductCode" = "8:{AB56C9D3-7D5C-4E94-A490-A4CBD1D71197}"
+        "PackageCode" = "8:{37C486E9-4905-491C-9CAD-2B2261A66AA8}"
         "UpgradeCode" = "8:{C22444F5-9DD6-40AC-AAC6-5D1276A44FCE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.0"
+        "ProductVersion" = "8:1.7.0"
         "Manufacturer" = "8:Florida Museum of Natural HIstory"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1462,7 +1462,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_69E926D67CF5404A90A1FF666DFE4CAF"
             {
-            "SourcePath" = "8:..\\SpecifyStorageTreeUpdateTool\\obj\\Release\\SpecifyStorageTreeUpdateTool.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_93B2DD46A11F4F9E809BC12407C4DD9E"
