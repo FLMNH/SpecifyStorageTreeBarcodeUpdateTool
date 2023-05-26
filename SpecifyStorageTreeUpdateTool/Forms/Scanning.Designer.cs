@@ -43,7 +43,6 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.tbOutput = new System.Windows.Forms.TextBox();
             this.tbInput = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -55,11 +54,14 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.lblSLOCCount = new System.Windows.Forms.Label();
+            this.lblSLOCCountLabel = new System.Windows.Forms.Label();
             this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.lblSLOCCountLabel = new System.Windows.Forms.Label();
-            this.lblSLOCCount = new System.Windows.Forms.Label();
+            this.auditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.auditSLOCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -74,6 +76,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.systemToolStripMenuItem,
+            this.auditToolStripMenuItem,
             this.reportsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -167,23 +170,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(1042, 105);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 45);
-            this.button1.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.button1, "Save Output to File");
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tbOutput
             // 
@@ -321,6 +307,25 @@
             this.splitContainer.SplitterDistance = 221;
             this.splitContainer.TabIndex = 11;
             // 
+            // lblSLOCCount
+            // 
+            this.lblSLOCCount.AutoSize = true;
+            this.lblSLOCCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSLOCCount.Location = new System.Drawing.Point(767, 29);
+            this.lblSLOCCount.Name = "lblSLOCCount";
+            this.lblSLOCCount.Size = new System.Drawing.Size(0, 20);
+            this.lblSLOCCount.TabIndex = 15;
+            // 
+            // lblSLOCCountLabel
+            // 
+            this.lblSLOCCountLabel.AutoSize = true;
+            this.lblSLOCCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSLOCCountLabel.Location = new System.Drawing.Point(654, 29);
+            this.lblSLOCCountLabel.Name = "lblSLOCCountLabel";
+            this.lblSLOCCountLabel.Size = new System.Drawing.Size(107, 20);
+            this.lblSLOCCountLabel.TabIndex = 14;
+            this.lblSLOCCountLabel.Text = "SLOC Count: ";
+            // 
             // lblScanCount
             // 
             this.lblScanCount.AutoSize = true;
@@ -351,24 +356,37 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
             // 
-            // lblSLOCCountLabel
+            // auditToolStripMenuItem
             // 
-            this.lblSLOCCountLabel.AutoSize = true;
-            this.lblSLOCCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSLOCCountLabel.Location = new System.Drawing.Point(28, 159);
-            this.lblSLOCCountLabel.Name = "lblSLOCCountLabel";
-            this.lblSLOCCountLabel.Size = new System.Drawing.Size(107, 20);
-            this.lblSLOCCountLabel.TabIndex = 14;
-            this.lblSLOCCountLabel.Text = "SLOC Count: ";
+            this.auditToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.auditSLOCToolStripMenuItem});
+            this.auditToolStripMenuItem.Name = "auditToolStripMenuItem";
+            this.auditToolStripMenuItem.Size = new System.Drawing.Size(48, 22);
+            this.auditToolStripMenuItem.Text = "Audit";
             // 
-            // lblSLOCCount
+            // auditSLOCToolStripMenuItem
             // 
-            this.lblSLOCCount.AutoSize = true;
-            this.lblSLOCCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSLOCCount.Location = new System.Drawing.Point(141, 159);
-            this.lblSLOCCount.Name = "lblSLOCCount";
-            this.lblSLOCCount.Size = new System.Drawing.Size(0, 20);
-            this.lblSLOCCount.TabIndex = 15;
+            this.auditSLOCToolStripMenuItem.Name = "auditSLOCToolStripMenuItem";
+            this.auditSLOCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.auditSLOCToolStripMenuItem.Text = "Audit SLOC";
+            this.auditSLOCToolStripMenuItem.Click += new System.EventHandler(this.auditSLOCToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(1042, 105);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 45);
+            this.button1.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.button1, "Save Output to File");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Scanning
             // 
@@ -431,6 +449,8 @@
         private System.Windows.Forms.ToolStripMenuItem scanLogToolStripMenuItem;
         private System.Windows.Forms.Label lblSLOCCountLabel;
         private System.Windows.Forms.Label lblSLOCCount;
+        private System.Windows.Forms.ToolStripMenuItem auditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem auditSLOCToolStripMenuItem;
     }
 }
 

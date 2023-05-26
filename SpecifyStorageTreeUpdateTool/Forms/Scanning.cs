@@ -103,7 +103,7 @@ namespace SpecifyStorageTreeUpdateTool
                     else
                     {
                         storageID = -1;
-                        lblError.Text = "Bad Storage Location " + input + ". Scan shelf label to begin.";
+                        lblError.Text = "Bad Storage Location " + input + ". Scan storage location label to begin.";
                     }
                 }
                 catch
@@ -268,6 +268,12 @@ namespace SpecifyStorageTreeUpdateTool
         private void scanLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Forms.ScanLog form = new Forms.ScanLog(sp);
+            form.ShowDialog();
+        }
+
+        private void auditSLOCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.AuditSLOC form = new Forms.AuditSLOC(sp);
             form.ShowDialog();
         }
     }
