@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -431,6 +432,46 @@ namespace SpecifyStorageTreeUpdateTool
                 }
             }
             return -1;
+        }
+
+        public List<Preparation> GetPreparationByStorageID(int storageID)
+        {
+            List<Preparation> preps = new List<Preparation>();
+            if(isConnected)
+            {
+                try
+                {
+                    string sql = @"SELECT 
+	                                PreparationID,
+                                    TRIM(LEADING 0 FROM co.CatalogNumber) AS CatalogNumber,
+                                    (SELECT t.FullName 
+                                    FROM determination d INNER JOIN taxon t ON d.TaxonID = t.TaxonID 
+                                    WHERE d.IsCurrent = 1 and d.CollectionObjectID = p.CollectionObjectID) as TaxonName
+                                FROM 
+	                                preparation p 
+                                    INNER JOIN collectionobject co ON p.CollectionObjectID = co.CollectionObjectID 
+                                WHERE 
+	                                StorageID = @storageID";
+                    MySqlCommand cmd = new MySqlCommand(sql,conn);
+                    cmd.Parameters.AddWithValue("@storageID",storageID);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    int prepID = 0;
+                    string catalogNumber,TaxonName,DisplayString;
+                    while (reader.Read())
+                    {
+                        prepID = reader.GetInt32(0);
+                        catalogNumber = reader.GetString(1);
+                        TaxonName = reader.GetString(2);
+                        DisplayString = String.Format("Barcode: {0}, CatNum: {1}, {2}",prepID.ToString(),catalogNumber,TaxonName);
+                        preps.Add(new Preparation(prepID,DisplayString));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return preps;
         }
 
         public List<int> GetContainerLocationPrepIDs(string containerID)
