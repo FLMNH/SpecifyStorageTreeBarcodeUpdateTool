@@ -74,6 +74,11 @@ namespace SpecifyStorageTreeUpdateTool.Forms
                         string sLocName = sp.GetStorageIDName(storageID);
                         lblScanLoc.Text = "Storage Location set to " + sLocName + ".";
                         // Populate Unscanned ListBox
+                        List<Preparation> preps = sp.GetPreparationByStorageID(storageID);
+                        foreach(Preparation preparation in preps)
+                        {
+                            unscannedPreps.Add(preparation);
+                        }
                     }
                     else
                     {
