@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,14 @@ namespace SpecifyStorageTreeUpdateTool.Forms
             unscannedPreps.AllowRemove = true;
             lbUnscanned.DataSource = unscannedPreps;
             lbUnscanned.DisplayMember = "DisplayString";
+            scannedPreps.AllowNew = true;
+            scannedPreps.AllowRemove = true;
+            lbScanned.DataSource = scannedPreps;
+            lbScanned.DisplayMember = "DisplayString";
+            extraPreps.AllowNew = true;
+            extraPreps.AllowRemove = true;
+            lbExtras.DataSource = extraPreps;
+            lbExtras.DisplayMember = "DisplayString";
         }
 
         private void processInput(string input)
@@ -73,12 +82,17 @@ namespace SpecifyStorageTreeUpdateTool.Forms
                     {
                         string sLocName = sp.GetStorageIDName(storageID);
                         lblScanLoc.Text = "Storage Location set to " + sLocName + ".";
+                        // Reset ListBoxes
+                        unscannedPreps.Clear();
+                        scannedPreps.Clear();
+                        extraPreps.Clear();
                         // Populate Unscanned ListBox
                         List<Preparation> preps = sp.GetPreparationByStorageID(storageID);
                         foreach(Preparation preparation in preps)
                         {
                             unscannedPreps.Add(preparation);
                         }
+                        lblUnscanned.Text = "Unscanned - " + unscannedPreps.Count.ToString();
                     }
                     else
                     {
@@ -110,10 +124,32 @@ namespace SpecifyStorageTreeUpdateTool.Forms
                     }
                     if (sp.IsValidPrepID(prepID))
                     {
-                       /* if(unscannedPreps.Contains(prepID.ToString()))
+                        bool found = false;
+                        foreach(Preparation prep in unscannedPreps.ToList())
                         {
-
-                        }*/
+                            if(prep.PrepID == prepID)
+                            {
+                                scannedPreps.Add(prep);
+                                lblScanned.Text = "Scanned - " + scannedPreps.Count.ToString();
+                                unscannedPreps.Remove(prep);
+                                lblUnscanned.Text = "Unscanned - " + unscannedPreps.Count.ToString();
+                                found = true;
+                                break;
+                            }
+                        }
+                        if(!found)
+                        {
+                            if (!scannedPreps.Contains(new Preparation(prepID, String.Empty)) && !extraPreps.Contains(new Preparation(prepID, String.Empty)))
+                            {
+                                string displayMember = sp.GetPrepFullDetails(prepID);
+                                extraPreps.Add(new Preparation(prepID, displayMember));
+                                lblExtra.Text = "Scanned but shouldn't be in this SLOC - " + extraPreps.Count.ToString();
+                            }
+                            else
+                            {
+                                lblError.Text = prepID.ToString() + "already scanned";
+                            }
+                        }
                     }
                     else
                     {
@@ -139,6 +175,38 @@ namespace SpecifyStorageTreeUpdateTool.Forms
             {
                 processInput(tbInput.Text.Trim());
                 tbInput.Clear();
+            }
+        }
+
+        private void btnDownloadAuditLog_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog.Title = "Save Audit History";
+            saveFileDialog.FileName = "AuditLog-" + DateTime.Now.ToLocalTime().ToString("yyyyMMddhhmm") + "-" + sp.AgentName + "-" + sp.Database + ".txt";
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName)) 
+                {
+                    writer.WriteLine("Audit Log for " + sp.GetStorageIDName(storageID) + "\n");
+                    writer.WriteLine("Exported " + DateTime.Now.ToLocalTime().ToString("yyyyMMddhhmm") + "\n");
+                    writer.WriteLine("\nUnscanned Preps...");
+                    foreach(Preparation prep in unscannedPreps)
+                    {
+                        writer.WriteLine(prep.DisplayString);
+                    }
+                    writer.WriteLine("\nScanned...");
+                    foreach(Preparation prep in scannedPreps)
+                    {
+                        writer.WriteLine(prep.DisplayString);
+                    }
+                    writer.WriteLine("\nScanned but shouldn't be on this SLOC...");
+                    foreach(Preparation prep in extraPreps)
+                    {
+                        writer.WriteLine(prep.DisplayString);
+                    }
+                }
             }
         }
     }
