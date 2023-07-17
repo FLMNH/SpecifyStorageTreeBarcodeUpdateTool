@@ -143,11 +143,11 @@ namespace SpecifyStorageTreeUpdateTool.Forms
                             {
                                 string displayMember = sp.GetPrepFullDetails(prepID);
                                 extraPreps.Add(new Preparation(prepID, displayMember));
-                                lblExtra.Text = "Scanned but shouldn't be in this SLOC - " + extraPreps.Count.ToString();
+                                lblExtra.Text = "Extras - " + extraPreps.Count.ToString();
                             }
                             else
                             {
-                                lblError.Text = prepID.ToString() + "already scanned";
+                                lblError.Text = prepID.ToString() + " already scanned";
                             }
                         }
                     }
