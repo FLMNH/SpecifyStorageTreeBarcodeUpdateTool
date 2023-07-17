@@ -38,14 +38,16 @@
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatePrepBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateStorageBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.auditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.auditSLOCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.tbOutput = new System.Windows.Forms.TextBox();
             this.tbInput = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusSpacer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusUserName = new System.Windows.Forms.ToolStripStatusLabel();
@@ -55,11 +57,11 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.lblSLOCCount = new System.Windows.Forms.Label();
+            this.lblSLOCCountLabel = new System.Windows.Forms.Label();
             this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.lblSLOCCountLabel = new System.Windows.Forms.Label();
-            this.lblSLOCCount = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -74,12 +76,13 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.systemToolStripMenuItem,
+            this.auditToolStripMenuItem,
             this.reportsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1244, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1202, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -137,6 +140,21 @@
             this.updateStorageBarcodesToolStripMenuItem.Text = "UpdateStorage Barcodes";
             this.updateStorageBarcodesToolStripMenuItem.Click += new System.EventHandler(this.updateStorageBarcodesToolStripMenuItem_Click);
             // 
+            // auditToolStripMenuItem
+            // 
+            this.auditToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.auditSLOCToolStripMenuItem});
+            this.auditToolStripMenuItem.Name = "auditToolStripMenuItem";
+            this.auditToolStripMenuItem.Size = new System.Drawing.Size(48, 22);
+            this.auditToolStripMenuItem.Text = "Audit";
+            // 
+            // auditSLOCToolStripMenuItem
+            // 
+            this.auditSLOCToolStripMenuItem.Name = "auditSLOCToolStripMenuItem";
+            this.auditSLOCToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.auditSLOCToolStripMenuItem.Text = "Audit SLOC";
+            this.auditSLOCToolStripMenuItem.Click += new System.EventHandler(this.auditSLOCToolStripMenuItem_Click);
+            // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -168,6 +186,31 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // tbOutput
+            // 
+            this.tbOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbOutput.Location = new System.Drawing.Point(0, 0);
+            this.tbOutput.Multiline = true;
+            this.tbOutput.Name = "tbOutput";
+            this.tbOutput.ReadOnly = true;
+            this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbOutput.Size = new System.Drawing.Size(1202, 499);
+            this.tbOutput.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.tbOutput, "Scan History");
+            this.tbOutput.WordWrap = false;
+            // 
+            // tbInput
+            // 
+            this.tbInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbInput.Location = new System.Drawing.Point(28, 113);
+            this.tbInput.Name = "tbInput";
+            this.tbInput.Size = new System.Drawing.Size(335, 26);
+            this.tbInput.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.tbInput, "Scan a Barcode");
+            this.tbInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enterKey_KeyDown);
+            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.Control;
@@ -185,31 +228,6 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // tbOutput
-            // 
-            this.tbOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbOutput.Location = new System.Drawing.Point(0, 0);
-            this.tbOutput.Multiline = true;
-            this.tbOutput.Name = "tbOutput";
-            this.tbOutput.ReadOnly = true;
-            this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOutput.Size = new System.Drawing.Size(1244, 672);
-            this.tbOutput.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.tbOutput, "Scan History");
-            this.tbOutput.WordWrap = false;
-            // 
-            // tbInput
-            // 
-            this.tbInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbInput.Location = new System.Drawing.Point(28, 113);
-            this.tbInput.Name = "tbInput";
-            this.tbInput.Size = new System.Drawing.Size(335, 26);
-            this.tbInput.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.tbInput, "Scan a Barcode");
-            this.tbInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enterKey_KeyDown);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -219,9 +237,9 @@
             this.toolStripStatusLabelCollection,
             this.toolStripStatusDatabase,
             this.toolStripStatusServer});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 921);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 690);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1244, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1202, 24);
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -231,7 +249,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.toolStripStatusSpacer.Name = "toolStripStatusSpacer";
-            this.toolStripStatusSpacer.Size = new System.Drawing.Size(996, 19);
+            this.toolStripStatusSpacer.Size = new System.Drawing.Size(954, 19);
             this.toolStripStatusSpacer.Spring = true;
             this.toolStripStatusSpacer.Text = "    ";
             this.toolStripStatusSpacer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -317,9 +335,28 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.tbOutput);
-            this.splitContainer.Size = new System.Drawing.Size(1244, 897);
-            this.splitContainer.SplitterDistance = 221;
+            this.splitContainer.Size = new System.Drawing.Size(1202, 666);
+            this.splitContainer.SplitterDistance = 163;
             this.splitContainer.TabIndex = 11;
+            // 
+            // lblSLOCCount
+            // 
+            this.lblSLOCCount.AutoSize = true;
+            this.lblSLOCCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSLOCCount.Location = new System.Drawing.Point(767, 29);
+            this.lblSLOCCount.Name = "lblSLOCCount";
+            this.lblSLOCCount.Size = new System.Drawing.Size(0, 20);
+            this.lblSLOCCount.TabIndex = 15;
+            // 
+            // lblSLOCCountLabel
+            // 
+            this.lblSLOCCountLabel.AutoSize = true;
+            this.lblSLOCCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSLOCCountLabel.Location = new System.Drawing.Point(654, 29);
+            this.lblSLOCCountLabel.Name = "lblSLOCCountLabel";
+            this.lblSLOCCountLabel.Size = new System.Drawing.Size(107, 20);
+            this.lblSLOCCountLabel.TabIndex = 14;
+            this.lblSLOCCountLabel.Text = "SLOC Count: ";
             // 
             // lblScanCount
             // 
@@ -351,31 +388,12 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
             // 
-            // lblSLOCCountLabel
-            // 
-            this.lblSLOCCountLabel.AutoSize = true;
-            this.lblSLOCCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSLOCCountLabel.Location = new System.Drawing.Point(28, 159);
-            this.lblSLOCCountLabel.Name = "lblSLOCCountLabel";
-            this.lblSLOCCountLabel.Size = new System.Drawing.Size(107, 20);
-            this.lblSLOCCountLabel.TabIndex = 14;
-            this.lblSLOCCountLabel.Text = "SLOC Count: ";
-            // 
-            // lblSLOCCount
-            // 
-            this.lblSLOCCount.AutoSize = true;
-            this.lblSLOCCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSLOCCount.Location = new System.Drawing.Point(141, 159);
-            this.lblSLOCCount.Name = "lblSLOCCount";
-            this.lblSLOCCount.Size = new System.Drawing.Size(0, 20);
-            this.lblSLOCCount.TabIndex = 15;
-            // 
             // Scanning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1244, 945);
+            this.ClientSize = new System.Drawing.Size(1202, 714);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -431,6 +449,8 @@
         private System.Windows.Forms.ToolStripMenuItem scanLogToolStripMenuItem;
         private System.Windows.Forms.Label lblSLOCCountLabel;
         private System.Windows.Forms.Label lblSLOCCount;
+        private System.Windows.Forms.ToolStripMenuItem auditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem auditSLOCToolStripMenuItem;
     }
 }
 
