@@ -35,7 +35,7 @@ The application is barcode symbology agnostic as the decoding is done in the sca
 
 Guaranteed unique and immutable identifiers are required for any inventory system to be stable. The obvious choice is to use the storage and preparation primary keys within the Specify database. However, the Specify Object Relational Mapper (ORM) does not expose the primary keys within the application, meaning they are not available in the query tool or forms. Additionally, Specify does not, at the time of this release, support adding a unique constraint to an existing column on the storage or preparation tables. We tried and the application stack dumps on launch. 
 
-To overcome these limitations, the application we added the ability for the software to copy the storage and preparation primary keys into fields accessible the Specify query tool and forms. This functionality is "Update storage barcodes" and "Update prep barcodes" in the System section of the menu bar. The respective fields are defined in the application's config to accomodate differing schemas across Specify installations.
+To overcome these limitations, application we added the ability for the software to copy the storage and preparation primary keys into fields accessible the Specify query tool and forms. This functionality is "Update storage barcodes" and "Update prep barcodes" in the System section of the menu bar. The respective fields are defined in the application's config to accomodate differing schemas across Specify installations.
 
 Basing the barcodes off the database level primary keys allows us ensure uniqueness. Copying the keys into fields accessible in the Specify application allows us to generate and print the barcode labels using Specify.
 
