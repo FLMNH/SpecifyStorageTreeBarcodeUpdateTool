@@ -112,14 +112,14 @@ namespace SpecifyStorageTreeUpdateTool
                 }
                 
             }
-            else if (input.Length > 5 && input.Substring(0,4).Equals("CLOC"))
+            else if (input.Length > 4 && input.Substring(0,4).Equals("CID"))
             {
                 string containerID = "";
                 if (safeScan)
                 {
-                    if (input.Substring(4,sp.CollectionName.Length).ToUpper().Equals(sp.CollectionName.ToUpper()))
+                    if (input.Substring(3,sp.CollectionName.Length).ToUpper().Equals(sp.CollectionName.ToUpper()))
                     {
-                        containerID = input.Substring(4 + sp.CollectionName.Length);
+                        containerID = input.Substring(3 + sp.CollectionName.Length);
                     }
                 }
                 else
@@ -279,7 +279,7 @@ namespace SpecifyStorageTreeUpdateTool
 
         private void moveLocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Forms.MoveLocation form = new Forms.MoveLocation();
+            Forms.MoveLocation form = new Forms.MoveLocation(sp);
             form.ShowDialog();
         }
     }

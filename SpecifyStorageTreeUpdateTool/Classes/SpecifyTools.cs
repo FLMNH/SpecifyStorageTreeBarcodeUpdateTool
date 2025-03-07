@@ -651,6 +651,28 @@ namespace SpecifyStorageTreeUpdateTool
             return false;
         }
 
+        public bool UpdateStorageNodeParentID(int nodeId, int parentId)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "UPDATE storage SET ParentID = @parentId, ModifiedByAgentID = @agentId, TimestampModified = NOW() WHERE StorageID = @nodeId";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@parentId", parentId);
+                    cmd.Parameters.AddWithValue("@agentId", agentID);
+                    cmd.Parameters.AddWithValue("@nodeId", nodeId);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return false;
+        }
+        
         public bool UpdatePreparationStorageID(int prepID, int storageId)
         {
             if (isConnected)
