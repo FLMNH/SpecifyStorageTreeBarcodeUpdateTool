@@ -44,7 +44,7 @@ It is our hope Specify will eventually allow uniqueness constraints on additiona
 ## Legacy Support
 
 Storage Location was referred to as Shelf in previous versions of the application. Storage Location labels where referred to as Shelf Labels and used a prefix of "SHELF." 
-The application is backwards compatible and will process both prefixes of "SHELF" and "CLOC" as a Storage Location.
+The application is backwards compatible and will process both prefixes of "SHELF" and "SLOC" as a Storage Location.
 
 ## Rapid Proof of Concept
 
