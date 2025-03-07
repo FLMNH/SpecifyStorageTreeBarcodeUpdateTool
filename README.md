@@ -8,7 +8,7 @@ The application authenticates using Specify 6's user name, password, and key alg
 
 ## SafeScan
 
-When "Verify Collection Code in Barcode" is enabled in the config, the application is considered to be in SafeScan mode and requires the Colletion Code encoded in the barcode. This prevents preparations from being accidentally scanned in the wrong collection in shelving environments where multiple collections are present.
+When "Verify Collection Code in Barcode" is enabled in the config, the application is considered to be in SafeScan mode and requires the Collection Code encoded in the barcode. This prevents preparations from being accidentally scanned in the wrong collection in shelving environments where multiple collections are present.
 
 ## Label Definitions and Construction
 
