@@ -62,6 +62,7 @@
             this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.moveLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -78,6 +79,7 @@
             this.systemToolStripMenuItem,
             this.auditToolStripMenuItem,
             this.reportsToolStripMenuItem,
+            this.moveLocationToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -166,7 +168,7 @@
             // scanLogToolStripMenuItem
             // 
             this.scanLogToolStripMenuItem.Name = "scanLogToolStripMenuItem";
-            this.scanLogToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.scanLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.scanLogToolStripMenuItem.Text = "Scan Log";
             this.scanLogToolStripMenuItem.Visible = false;
             this.scanLogToolStripMenuItem.Click += new System.EventHandler(this.scanLogToolStripMenuItem_Click);
@@ -196,7 +198,7 @@
             this.tbOutput.Name = "tbOutput";
             this.tbOutput.ReadOnly = true;
             this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOutput.Size = new System.Drawing.Size(1202, 499);
+            this.tbOutput.Size = new System.Drawing.Size(1202, 500);
             this.tbOutput.TabIndex = 7;
             this.toolTip1.SetToolTip(this.tbOutput, "Scan History");
             this.tbOutput.WordWrap = false;
@@ -336,7 +338,7 @@
             // 
             this.splitContainer.Panel2.Controls.Add(this.tbOutput);
             this.splitContainer.Size = new System.Drawing.Size(1202, 666);
-            this.splitContainer.SplitterDistance = 163;
+            this.splitContainer.SplitterDistance = 162;
             this.splitContainer.TabIndex = 11;
             // 
             // lblSLOCCount
@@ -387,6 +389,13 @@
             this.lblTitle.Size = new System.Drawing.Size(499, 37);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
+            // 
+            // moveLocationToolStripMenuItem
+            // 
+            this.moveLocationToolStripMenuItem.Name = "moveLocationToolStripMenuItem";
+            this.moveLocationToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.moveLocationToolStripMenuItem.Text = "Move Location";
+            this.moveLocationToolStripMenuItem.Click += new System.EventHandler(this.moveLocationToolStripMenuItem_Click);
             // 
             // Scanning
             // 
@@ -451,6 +460,7 @@
         private System.Windows.Forms.Label lblSLOCCount;
         private System.Windows.Forms.ToolStripMenuItem auditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem auditSLOCToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveLocationToolStripMenuItem;
     }
 }
 

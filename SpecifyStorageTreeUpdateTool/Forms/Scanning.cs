@@ -59,11 +59,11 @@ namespace SpecifyStorageTreeUpdateTool
         {
             lblError.Text = String.Empty;
             bool safeScan = Properties.Settings.Default.VerifyCollectionCodeInBarcode;
-            if ( (input.Length > 5 && input.Substring(0,5).Equals("SHELF")) || (input.Length > 4 && input.Substring(0,4).Equals("SLOC")) )
+            if ( (input.Length > 5 && input.Substring(0,5).Equals("SHELF")) || (input.Length > 4 && input.Substring(0,4).Equals("SLOC")) || (input.Length > 4 && input.Substring(0, 4).Equals("MLOC")))
             {
                 try
                 {
-                    if (input.Substring(0, 4).Equals("SLOC"))
+                    if (input.Substring(0, 4).Equals("SLOC") || input.Substring(0,4).Equals("MLOC"))
                     {
                         if (safeScan)
                         {
@@ -112,14 +112,14 @@ namespace SpecifyStorageTreeUpdateTool
                 }
                 
             }
-            else if (input.Length > 5 && input.Substring(0,4).Equals("CLOC"))
+            else if (input.Length > 4 && input.Substring(0,4).Equals("CID"))
             {
                 string containerID = "";
                 if (safeScan)
                 {
-                    if (input.Substring(4,sp.CollectionName.Length).ToUpper().Equals(sp.CollectionName.ToUpper()))
+                    if (input.Substring(3,sp.CollectionName.Length).ToUpper().Equals(sp.CollectionName.ToUpper()))
                     {
-                        containerID = input.Substring(4 + sp.CollectionName.Length);
+                        containerID = input.Substring(3 + sp.CollectionName.Length);
                     }
                 }
                 else
@@ -274,6 +274,12 @@ namespace SpecifyStorageTreeUpdateTool
         private void auditSLOCToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Forms.AuditSLOC form = new Forms.AuditSLOC(sp);
+            form.ShowDialog();
+        }
+
+        private void moveLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.MoveLocation form = new Forms.MoveLocation(sp);
             form.ShowDialog();
         }
     }
