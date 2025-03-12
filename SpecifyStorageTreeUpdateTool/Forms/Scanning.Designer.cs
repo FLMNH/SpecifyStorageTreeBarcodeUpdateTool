@@ -42,6 +42,7 @@
             this.auditSLOCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -62,7 +63,6 @@
             this.lblScanCount = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.moveLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -168,10 +168,17 @@
             // scanLogToolStripMenuItem
             // 
             this.scanLogToolStripMenuItem.Name = "scanLogToolStripMenuItem";
-            this.scanLogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.scanLogToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.scanLogToolStripMenuItem.Text = "Scan Log";
             this.scanLogToolStripMenuItem.Visible = false;
             this.scanLogToolStripMenuItem.Click += new System.EventHandler(this.scanLogToolStripMenuItem_Click);
+            // 
+            // moveLocationToolStripMenuItem
+            // 
+            this.moveLocationToolStripMenuItem.Name = "moveLocationToolStripMenuItem";
+            this.moveLocationToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.moveLocationToolStripMenuItem.Text = "Move Location";
+            this.moveLocationToolStripMenuItem.Click += new System.EventHandler(this.moveLocationToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -375,7 +382,7 @@
             this.lblError.AutoSize = true;
             this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblError.ForeColor = System.Drawing.Color.IndianRed;
-            this.lblError.Location = new System.Drawing.Point(552, 29);
+            this.lblError.Location = new System.Drawing.Point(50, 57);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(0, 20);
             this.lblError.TabIndex = 12;
@@ -389,13 +396,6 @@
             this.lblTitle.Size = new System.Drawing.Size(499, 37);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Specify Storage Tree Update Tool";
-            // 
-            // moveLocationToolStripMenuItem
-            // 
-            this.moveLocationToolStripMenuItem.Name = "moveLocationToolStripMenuItem";
-            this.moveLocationToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.moveLocationToolStripMenuItem.Text = "Move Location";
-            this.moveLocationToolStripMenuItem.Click += new System.EventHandler(this.moveLocationToolStripMenuItem_Click);
             // 
             // Scanning
             // 
