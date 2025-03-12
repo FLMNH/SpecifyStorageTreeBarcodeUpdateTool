@@ -112,7 +112,7 @@ namespace SpecifyStorageTreeUpdateTool
                 }
                 
             }
-            else if (input.Length > 4 && input.Substring(0,4).Equals("CID"))
+            else if (input.Length > 4 && input.Substring(0,3).Equals("CID"))
             {
                 string containerID = "";
                 if (safeScan)
@@ -124,7 +124,8 @@ namespace SpecifyStorageTreeUpdateTool
                 }
                 else
                 {
-                    containerID = input.Substring(4);
+                    containerID = input.Substring(3);
+
                 }
                 if (storageID != -1 && sp.IsValidContainerID(containerID))
                 {
