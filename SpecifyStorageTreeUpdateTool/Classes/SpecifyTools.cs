@@ -537,6 +537,60 @@ namespace SpecifyStorageTreeUpdateTool
             return prepIDs;
         }
 
+        public string GetStorageNodeFullName(int storageID)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "SELECT FullName FROM storage WHERE StorageID = @storageID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@storageID", storageID);
+                    object result = cmd.ExecuteScalar();
+                    if (result == null)
+                    {
+                        return String.Empty;
+                    }
+                    else
+                    {
+                        return result.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return String.Empty;
+        }
+
+        public int GetStorageNodeParentID(int storageID)
+        {
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "SELECT ParentID FROM storage WHERE StorageID = @storageID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@storageID", storageID);
+                    object result = cmd.ExecuteScalar();
+                    if (result == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return int.Parse(result.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return -1;
+        }
+
         public bool IsValidStorageID(int id)
         {
             if (isConnected)
@@ -657,9 +711,13 @@ namespace SpecifyStorageTreeUpdateTool
             {
                 try
                 {
-                    string sql = "UPDATE storage SET ParentID = @parentId, ModifiedByAgentID = @agentId, TimestampModified = NOW() WHERE StorageID = @nodeId";
+                    string currentParentFullName = GetStorageNodeFullName(GetStorageNodeParentID(nodeId));
+                    string newParentFullName = GetStorageNodeFullName(parentId);
+                    string FullName = GetStorageNodeFullName(nodeId).Replace(currentParentFullName, newParentFullName);
+                    string sql = "UPDATE storage SET ParentID = @parentId, FullName = @FullName, ModifiedByAgentID = @agentId, TimestampModified = NOW() WHERE StorageID = @nodeId";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@parentId", parentId);
+                    cmd.Parameters.AddWithValue("@FullName", FullName);
                     cmd.Parameters.AddWithValue("@agentId", agentID);
                     cmd.Parameters.AddWithValue("@nodeId", nodeId);
                     cmd.ExecuteNonQuery();
