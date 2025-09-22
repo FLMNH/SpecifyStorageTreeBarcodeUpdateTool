@@ -70,7 +70,7 @@
             this.tbServerName.Location = new System.Drawing.Point(540, 101);
             this.tbServerName.Name = "tbServerName";
             this.tbServerName.Size = new System.Drawing.Size(255, 26);
-            this.tbServerName.TabIndex = 2;
+            this.tbServerName.TabIndex = 1;
             this.toolTip1.SetToolTip(this.tbServerName, "Enter MySQL Server Address");
             // 
             // lblDatabaseServer
@@ -90,7 +90,7 @@
             this.tbDBName.Location = new System.Drawing.Point(540, 133);
             this.tbDBName.Name = "tbDBName";
             this.tbDBName.Size = new System.Drawing.Size(255, 26);
-            this.tbDBName.TabIndex = 3;
+            this.tbDBName.TabIndex = 2;
             this.toolTip1.SetToolTip(this.tbDBName, "Enter Specify database name.");
             // 
             // lblDatabaseName
@@ -110,8 +110,9 @@
             this.tbUserName.Location = new System.Drawing.Point(540, 198);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(255, 26);
-            this.tbUserName.TabIndex = 5;
+            this.tbUserName.TabIndex = 4;
             this.toolTip1.SetToolTip(this.tbUserName, "Enter MySQL user name.");
+            this.tbUserName.Leave += new System.EventHandler(this.tbUserName_Leave);
             // 
             // lblUserName
             // 
@@ -130,7 +131,7 @@
             this.tbPassword.Location = new System.Drawing.Point(540, 230);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(255, 26);
-            this.tbPassword.TabIndex = 1;
+            this.tbPassword.TabIndex = 5;
             this.toolTip1.SetToolTip(this.tbPassword, "MySQL User Password");
             this.tbPassword.UseSystemPasswordChar = true;
             // 
@@ -184,7 +185,7 @@
             this.tbCollectionName.Location = new System.Drawing.Point(540, 165);
             this.tbCollectionName.Name = "tbCollectionName";
             this.tbCollectionName.Size = new System.Drawing.Size(255, 26);
-            this.tbCollectionName.TabIndex = 4;
+            this.tbCollectionName.TabIndex = 3;
             this.toolTip1.SetToolTip(this.tbCollectionName, "Enter Specify database name.");
             // 
             // lblCollectionName
@@ -265,6 +266,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LoginScreen";
             this.Text = "LoginScreen";
+            this.Load += new System.EventHandler(this.login_LoadEvent);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
