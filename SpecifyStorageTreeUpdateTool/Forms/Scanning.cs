@@ -283,5 +283,11 @@ namespace SpecifyStorageTreeUpdateTool
             Forms.MoveLocation form = new Forms.MoveLocation(sp);
             form.ShowDialog();
         }
+
+        private void scanCOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.COScan form = new Forms.COScan(sp);
+            form.ShowDialog();
+        }
     }
 }

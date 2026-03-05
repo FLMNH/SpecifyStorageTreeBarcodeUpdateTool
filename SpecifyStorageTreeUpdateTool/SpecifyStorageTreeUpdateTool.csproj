@@ -118,6 +118,12 @@
     <Compile Include="Forms\ConfigForm.Designer.cs">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\COScan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\COScan.Designer.cs">
+      <DependentUpon>COScan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MoveLocation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\COScan.resx">
+      <DependentUpon>COScan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MoveLocation.resx">
       <DependentUpon>MoveLocation.cs</DependentUpon>
