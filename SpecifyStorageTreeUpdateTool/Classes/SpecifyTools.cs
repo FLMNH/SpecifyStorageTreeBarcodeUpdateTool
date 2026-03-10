@@ -537,6 +537,129 @@ namespace SpecifyStorageTreeUpdateTool
             return prepIDs;
         }
 
+        public List<KeyValuePair<int, string>> GetCmbPrepTypes()
+        {
+            List<KeyValuePair<int, string>> prepTypeList = new List<KeyValuePair<int, string>>();
+            string sql = $"SELECT PrepTypeID, Name FROM preptype WHERE CollectionID = {collectionID}";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                prepTypeList.Add(new KeyValuePair<int, string>(reader.GetInt32(0), reader.GetString(1)));
+            }
+            reader.Close();
+            return prepTypeList;
+        }
+
+        public int GetCOIDbyField(string fieldName, string fieldValue)
+        {
+            int COID = 0;
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = $"SELECT CollectionObjectID FROM collectionobject WHERE {fieldName} = @fieldValue";
+                    MySqlCommand cmd = new MySqlCommand( sql, conn );
+                    cmd.Parameters.AddWithValue("@fieldValue", fieldValue);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    List<int> ids = new List<int>();
+                    while (reader.Read())
+                    {
+                        ids.Add(reader.GetInt32(0));
+                    }
+                    reader.Close();
+                    if(ids.Count != 1)
+                    {
+                        throw new Exception($"Scanned value {fieldValue} identifies {ids.Count} Collection Objects");
+                    }
+                    COID = ids.First();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return COID;
+        }
+
+        public int GetCOFirstPrepType(int COID, int prepTypeID)
+        {
+            int prepID = 0;
+            if (isConnected)
+            {
+                try
+                {
+                    string sql = "SELECT PreparationID from preparation where CollectionObjectID = @CollObjID AND PrepTypeID = @prepTypeID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn );
+                    cmd.Parameters.AddWithValue("@CollObjID", COID);
+                    cmd.Parameters.AddWithValue("@PrepTypeID", prepTypeID);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    List<int> ids = new List<int>();
+                    while (reader.Read())
+                    {
+                        ids.Add((int)reader.GetInt32(0));
+                    }
+                    reader.Close();
+                    if(ids.Count > 0)
+                    {
+                        prepID = ids.First();
+                    }
+                    else
+                    {
+                        prepID = 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return prepID;
+        }
+
+        public int CreatePrep(int COID, int PrepTypeID)
+        {
+            int prepID = 0;
+            try
+            {
+                string sql = "INSERT INTO preparation " +
+                "(TimestampCreated, TimestampModified, version, " +
+                "CollectionMemberID, CountAmt, " +
+                "GUID, ModifiedByAgentID, CreatedByAgentID, " +
+                "PrepTypeID, CollectionObjectID) " +
+                "VALUES(NOW(), NOW(), 1, " +
+                "@CollectionID, 1, " +
+                "UUID(), @modAgentID, @createAgentID, " +
+                "@prepTypeID, @collObjID)";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@CollectionID", collectionID);
+                cmd.Parameters.AddWithValue("@modAgentID", agentID);
+                cmd.Parameters.AddWithValue("@createAgentID", agentID);
+                cmd.Parameters.AddWithValue("@prepTypeID", PrepTypeID);
+                cmd.Parameters.AddWithValue("@collObjID", COID);
+                cmd.ExecuteNonQuery();
+                int insertedID = (int)cmd.LastInsertedId;
+                return insertedID;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return prepID;
+        }
+
+        public List<string> GetCOFieldNames()
+        {
+            List<string> fields = new List<string>{
+                "AltCatalogNumber",
+                "CatalogNumber",
+                "FieldNumber", 
+                "GUID", 
+                "UniqueIdentifier"
+            };
+            return fields;
+        }
+
         public string GetStorageNodeFullName(int storageID)
         {
             if (isConnected)
