@@ -20,11 +20,11 @@ The software operates by scanning the following types of labels:
 - **Movable Location (MLOC) labels** - These are for semi-permanent locations, such as vial lot containers, that correspond to storage nodes in the Specify Storage Tree and may move around. The Move Location form in the application allows you move MLOCs by scanning them to an SLOC.
   - SafeScan Enabled: Encode the concatenation of MLOC, collection code and storage.storageID, E.G. **SLOCFish4236**
   - SafeScan Disabled: Encode the concatenation of MLOC and storage.storageID, E.G. **SLOC4236**
-- **Container ID (CID) labels**: These labels correspond to the ContainerID field on preparation. PrepContainerIDField has been added as config parameter in the config form to accommodate differing schemas. When a CID label is scanned, the application sets the storage location for all preparations with the scanned ContainerID. CID scanning improves workflows for tanks, large jars, and vial lots which contain multiple preps. CID labels allow for the batch assignment of prepartions to storage nodes.
+- **Container ID (CID) labels**: These labels correspond to the ContainerID field on preparation. PrepContainerIDField has been added as config parameter in the config form to accommodate differing schemas. When a CID label is scanned, the application sets the storage location for all preparations with the scanned ContainerID. CID scanning improves workflows for tanks, large jars, and vial lots which contain multiple preps. CID labels allow for the batch assignment of preparations to storage nodes.
   - SafeScan Enabled: Encode CID, collection code, and preparation.ContainerIDField (defined in config). E.G. **CIDFishVL-96**.
   - SafeScan Disabled: Encode CID and preparation.ContainerIDField (defined in config). E.G. **CIDVL-96**.
 - **Preparation Labels** - These labels correspond to a single preparation. 
-  - SafesScan Enabled: Encode the collection code and preparation.preparationId, E.G. **Fish65398**.
+  - SafeScan Enabled: Encode the collection code and preparation.preparationId, E.G. **Fish65398**.
   - SafeScan Disabled: Encode preparation.preparationId, E.G. **65398**.
 
 ## Symbology
