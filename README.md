@@ -37,20 +37,20 @@ Guaranteed unique and immutable identifiers are required for any inventory syste
 
 To overcome these limitations, we added the ability for the software to copy the storage and preparation primary keys into fields accessible in the Specify query tool and forms. This functionality is "Update storage barcodes" and "Update prep barcodes" in the System section of the menu bar. The respective fields are defined in the application's config to accomodate differing schemas across Specify installations.
 
-Basing the barcodes off the database level primary keys allows us ensure uniqueness. Copying the keys into fields accessible in the Specify application allows us to generate and print the barcode labels using Specify.
+Basing the barcodes off the database level primary keys allows us to ensure uniqueness. Copying the keys into fields accessible in the Specify application allows us to generate and print the barcode labels using Specify.
 
 It is our hope Specify will eventually allow uniqueness constraints on additional storage and preparation fields so we may eliminate the update step. 
 
 ## Legacy Support
 
-Storage Location was referred to as Shelf in previous versions of the application. Storage Location labels where referred to as Shelf Labels and used a prefix of "SHELF." 
+Storage Location was referred to as Shelf in previous versions of the application. Storage Location labels were referred to as Shelf Labels and used a prefix of "SHELF." 
 The application is backwards compatible and will process both prefixes of "SHELF" and "SLOC" as a Storage Location.
 
 ## Rapid Proof of Concept
 
 For rapid proof of concept testing you may use the Libre Barcode 39 Text font from https://fonts.google.com/specimen/Libre+Barcode+39+Text for label generation. Code 39 uses asterisks as start stop delimiters, which makes for easy generation. Code 39 is nearly ubiquitous with scanners which keeps things simple.
 
-## Gratuitous Screen Shots
+## Screen Shots
 
 <img width="538" alt="LoginScreen" src="https://user-images.githubusercontent.com/81316350/146015801-38997559-b00b-404a-82b5-398cf790a6ea.png">
 
