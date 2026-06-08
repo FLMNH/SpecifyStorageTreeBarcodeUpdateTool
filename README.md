@@ -59,6 +59,10 @@ Scanning history may be saved to a text file by clicking the download icon on th
 
 <img width="638" alt="ScanningScreen" src="https://user-images.githubusercontent.com/81316350/146019316-b0def0b7-9a16-4312-bfb5-db07102c566e.png">
 
+The Audit Tool will display a scanned SLOC discrepancy report, showing barcodes that have been actively scanned and appear in the scan log and those that have not been actively scanned.  This enables rapid visual reconciliation.
+
+<img width="638" alt="scan tool audit in use" src="https://github.com/user-attachments/assets/b9128b60-fd9e-4585-b43b-6ce1c40f9edf" />
+
 ## Prerequisites
 
 This software adds fuctionality to a Specify collection database and requires a working installation of the Specify Collection database on a MariaDB server. https://specifysoftware.org
