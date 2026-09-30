@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,7 +90,7 @@ namespace SpecifyStorageTreeUpdateTool.Forms
                         lblStatus.Text = "Storage Location set to " + sLocName + ".";
                         tbOutput.AppendText("Storage Location set to " + sLocName + ".");
                         tbOutput.AppendText(Environment.NewLine);
-                        lblSLOCCount.Text = slocCount.ToString();
+                        lblSLOCCount.Text = "SLOC/MLOC Count: " + slocCount.ToString();
                     }
                     else
                     {
@@ -135,7 +136,7 @@ namespace SpecifyStorageTreeUpdateTool.Forms
                             scanCount++;
                             lblScanCount.Text = "Scan Count: " + scanCount.ToString();
                             slocCount = sp.GetSLOCCount(storageID);
-                            lblSLOCCount.Text = slocCount.ToString();
+                            lblSLOCCount.Text = "SLOC/MLOC Count: " + slocCount.ToString();
                         }
                         else
                         {
@@ -157,8 +158,8 @@ namespace SpecifyStorageTreeUpdateTool.Forms
                 try
                 {
                     // 1) Scan in the CollectionObject identifier
-                    // 2) If PrepType exists, and CreateOnly bool is True, create a new Prep of PrepType
-                    // else: create New Prep of selected PrepType
+                    // 2) If PrepType does not exist, and CreateOnly bool is True, create a new Prep of PrepType
+                    // else if a Prep or Preps of selected PrepType exists not assigned to storage node, use the first of those
                     int prepID = 0;
 
                     if (input.Length > 0)
@@ -190,7 +191,7 @@ namespace SpecifyStorageTreeUpdateTool.Forms
                         scanCount++;
                         lblScanCount.Text = "Scan Count: " + scanCount.ToString();
                         slocCount = sp.GetSLOCCount(storageID);
-                        lblSLOCCount.Text = slocCount.ToString();
+                        lblSLOCCount.Text = "SLOC/MLOC Count: " + slocCount.ToString();
                     }
                     else
                     {
@@ -210,6 +211,29 @@ namespace SpecifyStorageTreeUpdateTool.Forms
 
         }
 
-        
+        private void saveScanHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stream stream;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog.Title = "Save Scan History";
+            saveFileDialog.FileName = DateTime.Now.ToLocalTime().ToString("yyyyMMddhhmm") + "-" + sp.AgentName + "-" + sp.Database + ".txt";
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialog.FileName, tbOutput.Text);
+            }
+
+        }
+
+        private void ckbxCreatePrep_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            saveScanHistoryToolStripMenuItem_Click(sender, e);
+        }
     }
 }
